@@ -1,0 +1,278 @@
+ %% 
+%% Copyright 2019-2021 Elsevier Ltd
+%% 
+%% This file is part of the 'CAS Bundle'.
+%% --------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'CAS Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for cas-sc documentclass for 
+%% single column output.
+
+\documentclass[a4paper,fleqnn]{cas-sc}
+
+% If the frontmatter runs over more than one page
+% use the longmktitle option.
+
+%\documentclass[a4paper,fleqn,longmktitle]{cas-sc}
+
+\hypersetup{colorlinks=true,allcolors=cyan}
+\usepackage[numbers]{natbib}
+%\usepackage[authoryear]{natbib}
+%\usepackage[authoryear,longnamesfirst]{natbib}
+
+
+%Cuong
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{dsfont}
+\usepackage{amsfonts}
+\usepackage{bigdelim}
+%\usepackage[section]{placeins}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[subfloat]{labelformat=empty, font=footnotesize}
+\usepackage{float}
+
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+%%%
+
+% Uncomment and use as if needed
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newdefinition{rmk}{Remark}
+%\newproof{pf}{Proof}
+%\newproof{pot}{Proof of Theorem \ref{thm}}
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+% Short title
+\shorttitle{}    
+
+% Short author
+\shortauthors{D.C Hoang et al.}  
+
+% Main title of the paper
+\title [mode = title]{Efficient Industrial Point Cloud Anomaly Detection via Mamba and Selective Anomalous Feature Generation}  
+
+% Title footnote mark
+% eg: \tnotemark[1]
+%\tnotemark[1] 
+
+% Title footnote 1.
+% eg: \tnotetext[1]{Title footnote text}
+%\tnotetext[1]{tnote text} 
+
+% First author
+%
+% Options: Use if required
+% eg: \author[1,3]{Author Name}[type=editor,
+%       style=chinese,
+%       auid=000,
+%       bioid=1,
+%       prefix=Sir,
+%       orcid=0000-0000-0000-0000,
+%       facebook=<facebook id>,
+%       twitter=<twitter id>,
+%       linkedin=<linkedin id>,
+%       gplus=<gplus id>]
+
+\author[1]{Dinh-Cuong Hoang}[orcid=0000-0001-6058-2426]
+\ead{cuonghd12@fe.edu.vn}
+\cormark[1]
+
+\author[2]{Phan Xuan Tan}
+\ead{tanpx@shibaura-it.ac.jp}
+\cormark[1]
+
+\author[3]{Anh-Nhat Nguyen}
+\ead{nhatna3@fe.edu.vn}
+
+\author[1]{Hoang-Nam Duong}
+\ead{Dn6175j@gre.ac.uk}
+\author[1]{Minh-Duc Cao}
+\ead{duccmgch230132@fpt.edu.vn}
+\author[1]{Duc-Huy Ngo}
+\ead{huyndgch230154@fpt.edu.vn}
+\author[1]{Ta Huu Anh Duong}
+\ead{duongthagch220838@fpt.edu.vn}
+\author[1]{Tuan-Minh Huynh}
+\ead{minhhtgch230186@fpt.edu.vn}
+\author[1]{Duc-Manh Nguyen}
+\ead{manhndgch220466@fpt.edu.vn}
+
+\author[3]{Van-Thiep Nguyen}
+\ead{thiepnvhe173027@fpt.edu.vn}
+\author[3]{Thu-Uyen Nguyen}
+\ead{uyennthe176614@fpt.edu.vn}
+\author[3]{Minh-Quang Do}
+\ead{quangdmhe180854@fpt.edu.vn}
+\author[3]{Xuan-Tung Dinh}
+\ead{tungdxhe172611@fpt.edu.vn}
+\author[3]{Van-Hiep Duong}
+\ead{hiepdvhe181185@fpt.edu.vn}
+\author[3]{Ngoc-Anh Hoang}
+\ead{anhhnhe186401@fpt.edu.vn}
+
+% Address/affiliation
+\affiliation[1]{organization={Greenwich Vietnam, FPT University},
+            city={Hanoi},
+            postcode={10000}, 
+            country={Vietnam}}
+
+\affiliation[2]{organization={College of Engineering, Shibaura Institute of Technology},
+            city={Tokyo},
+            postcode={135-8548}, 
+            country={Japan}}
+
+\affiliation[3]{organization={ICT Department, FPT University},
+            city={Hanoi},
+            postcode={10000}, 
+            country={Vietnam}}
+
+\cortext[1]{Corresponding author}
+
+% Footnote text
+%\fntext[1]{}
+
+% For a title note without a number/mark
+%\nonumnote{}
+
+% Here goes the abstract
+\begin{abstract}
+Automated detection of surface defects on three-dimensional (3D) parts is vital for ensuring product quality and safety in manufacturing. However, three key challenges hinder reliable detection: geometric context ambiguity across complex part shapes, domain mismatch between generic pretrained features and industrial scans (with their unique noise and reflectivity), and the scarcity of diverse defect examples for training. To overcome these issues, we propose a novel single-forward-pass framework for point cloud anomaly detection, comprising three new modules: (1) Spatial Context Aggregation, which grounds each local patch in a set of learned global prototypes via an optimal-transport alignment to resolve context ambiguity; (2) Feature Adaptor, a lightweight two-layer multilayer perceptron (MLP) that fine-tunes self-supervised Point-MAE embeddings to the specific characteristics of industrial scans; and (3) Selective Anomalous Feature Generator, which synthesizes realistic hard negatives by corrupting random subsets of feature tokens, thus mitigating the need for extensive defect labels. An attention-based discriminator trained with patch-wise supervision learns to distinguish these hard negatives from genuine defect-free patterns. At inference, our pipeline delivers dense per-point anomaly scores in a single pass at up to 13.5 frames per second (FPS). On the Real3D-AD benchmark, we observe point-level improvements of 2.8\% in area under the receiver operating characteristic curve (AUROC) and 5.7\% in area under the precision-recall curve (AUPR), with object-level gains of 3.0\% (AUROC) and 3.5\% (AUPR). Evaluated on our newly released Industrial3D-AD dataset, which captures realistic sensor noise and reflective materials, we see similar enhancements (2.9\%/5.3\% point-level, 2.8\%/3.3\% object-level).
+\end{abstract}
+
+% Use if graphical abstract is present
+%\begin{graphicalabstract}
+%\includegraphics{}
+%\end{graphicalabstract}
+
+% Research highlights
+%\begin{highlights}
+%\item 
+%\item 
+%\item 
+%\end{highlights}
+
+% Keywords
+% Each keyword is seperated by \sep
+\begin{keywords}
+ \sep Industrial anomaly detection \sep  Defect recognition \sep Object Anomaly Segmentation \sep
+\end{keywords}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\input{Introduction} 
+%
+\input{RelatedWork}
+%
+\input{Method}
+%
+\input{Results}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Main text
+%\section{Intro}\label{intro}
+
+% Numbered list
+% Use the style of numbering in square brackets.
+% If nothing is used, default style will be taken.
+%\begin{enumerate}[a)]
+%\item 
+%\item 
+%\item 
+%\end{enumerate}  
+
+% Unnumbered list
+%\begin{itemize}
+%\item 
+%\item 
+%\item 
+%\end{itemize}  
+
+% Description list
+%\begin{description}
+%\item[]
+%\item[] 
+%\item[] 
+%\end{description}  
+
+% Figure
+%\begin{figure}[<options>]
+%	\centering
+%		\includegraphics[<options>]{}
+%	  \caption{}\label{fig1}
+%\end{figure}
+
+
+%\begin{table}[<options>]
+%\caption{}\label{tbl1}
+%\begin{tabular*}{\tblwidth}{@{}LL@{}}
+%\toprule
+%  &  \\ % Table header row
+%\midrule
+% & \\
+% & \\
+%& \\
+% & \\
+%\bottomrule
+%\end{tabular*}
+%\end{table}
+
+% Uncomment and use as the case may be
+%\begin{theorem} 
+%\end{theorem}
+
+% Uncomment and use as the case may be
+%\begin{lemma} 
+%\end{lemma}
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%\section{Method}\label{method}
+
+% To print the credit authorship contribution details
+%\printcredits
+
+%% Loading bibliography style file
+%\bibliographystyle{model1-num-names}
+\bibliographystyle{elsarticle-num}
+%\bibliographystyle{cas-model2-names}
+
+% Loading bibliography database
+\bibliography{cas-refs}
+
+% Biography
+%\bio{}
+% Here goes the biography details.
+%\endbio
+
+%\bio{pic1}
+% Here goes the biography details.
+%\endbio
+
+\end{document}
+
+

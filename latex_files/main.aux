@@ -1,0 +1,211 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\orcidauthor{0000-0001-6058-2426}{Dinh-Cuong Hoang}
+\emailauthor{cuonghd12@fe.edu.vn}{Dinh-Cuong Hoang}
+\csgdef{mark@corau1}{1}
+\emailauthor{tanpx@shibaura-it.ac.jp}{Phan Xuan Tan}
+\csgdef{mark@corau2}{1}
+\emailauthor{nhatna3@fe.edu.vn}{Anh-Nhat Nguyen}
+\emailauthor{Dn6175j@gre.ac.uk}{Hoang-Nam Duong}
+\emailauthor{duccmgch230132@fpt.edu.vn}{Minh-Duc Cao}
+\emailauthor{huyndgch230154@fpt.edu.vn}{Duc-Huy Ngo}
+\emailauthor{duongthagch220838@fpt.edu.vn}{Ta Huu Anh Duong}
+\emailauthor{minhhtgch230186@fpt.edu.vn}{Tuan-Minh Huynh}
+\emailauthor{manhndgch220466@fpt.edu.vn}{Duc-Manh Nguyen}
+\emailauthor{thiepnvhe173027@fpt.edu.vn}{Van-Thiep Nguyen}
+\emailauthor{uyennthe176614@fpt.edu.vn}{Thu-Uyen Nguyen}
+\emailauthor{quangdmhe180854@fpt.edu.vn}{Minh-Quang Do}
+\emailauthor{tungdxhe172611@fpt.edu.vn}{Xuan-Tung Dinh}
+\emailauthor{hiepdvhe181185@fpt.edu.vn}{Van-Hiep Duong}
+\emailauthor{anhhnhe186401@fpt.edu.vn}{Ngoc-Anh Hoang}
+\citation{venkataramanan2020attention}
+\citation{ding2022catching}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Related Work}{1}{section.1}\protected@file@percent }
+\newlabel{sec:relatedwork}{{1}{1}{Related Work}{section.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Industrial Image Anomaly Detection}{1}{subsection.1.1}\protected@file@percent }
+\citation{chadha2019comparison,chu2020neural}
+\citation{shi2021dfr}
+\citation{hou2021divide}
+\citation{zavrtanik2021draem}
+\citation{zavrtanik2022dsr}
+\citation{de2022masked}
+\citation{yao2023focus}
+\citation{luo2024ami}
+\citation{zhang2023unsupervised,lu2023removing,tebbe2024dynamic}
+\citation{bergmann2020uninformed,salehi2021multiresolution,wan2022unsupervised,gu2023remembering,tong2024enhanced}
+\citation{defard2021padim,roth2022towards,bae2023pni,zuo2024reconstruction,hyun2024reconpatch}
+\citation{li2021cutpaste}
+\citation{zavrtanik2021draem}
+\citation{liu2023simplenet}
+\citation{zavrtanik2022dsr,fang2023fastrecon,zhang2024realnet}
+\citation{horwitz2023back}
+\citation{cao2024complementary}
+\citation{wang2023multimodal,rudolph2023asymmetric}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Industrial 3D Anomaly Detection}{2}{subsection.1.2}\protected@file@percent }
+\citation{bergmann2023anomaly}
+\citation{liu2023real3d}
+\citation{zhu2024towards}
+\citation{li2024towards}
+\citation{zhou2024r3d}
+\citation{liu2023simplenet}
+\citation{gu2020hippo,gu2021efficiently,gu2021combining,gu2022parameterization,smith2022simplified}
+\citation{gu2020hippo}
+\citation{gu2021efficiently}
+\citation{gu2021combining,gu2022parameterization,smith2022simplified}
+\citation{vaswani2017attention}
+\citation{zhu2024vision,liu2024vmamba,guo2024mambair}
+\citation{zhu2024vision,liu2024vmamba,guo2024mambair}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}State Space Model}{3}{subsection.1.3}\protected@file@percent }
+\citation{liang2024pointmamba,han2024mamba3d,zha2024lcm}
+\citation{pang2022masked}
+\citation{chang2015shapenet}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Methodology}{4}{section.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of the 3D anomaly detection pipeline.\relax }}{4}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:overview}{{1}{4}{Overview of the 3D anomaly detection pipeline.\relax }{figure.caption.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Backbone}{4}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Geometric Semantic-Aware Sorter (GSAS)}{5}{subsection.2.2}\protected@file@percent }
+\newlabel{sec:gsas}{{2.2}{5}{Geometric Semantic-Aware Sorter (GSAS)}{subsection.2.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces GSAS.\relax }}{5}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:GSAS}{{2}{5}{GSAS.\relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Permutation-invariant local descriptors (graph-on-patches, within-layer aggregation).}{5}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Token-slot affinities and differentiable soft-permutation.}{6}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Weighted aggregation into ordered slots.}{6}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Auxiliary regularizers for locality and assignment sharpness.}{6}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Remarks on shapes and stability.}{7}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Mamba Feature Adapter}{7}{subsubsection.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Anomalous Feature Generator}{7}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Cross-Patch Attention Discriminator}{8}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Loss Function and Training}{8}{subsection.2.5}\protected@file@percent }
+\newlabel{sec:loss}{{2.5}{8}{Loss Function and Training}{subsection.2.5}{}}
+\citation{li2024towards,chang2015shapenet}
+\citation{li2024towards}
+\citation{liu2023real3d}
+\citation{liu2023real3d}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Inference and Scoring Function}{9}{subsection.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Evaluation}{9}{section.3}\protected@file@percent }
+\newlabel{sec:Evaluation}{{3}{9}{Evaluation}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Datasets}{9}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Implementation Details}{10}{subsection.3.2}\protected@file@percent }
+\newlabel{sec:impl}{{3.2}{10}{Implementation Details}{subsection.3.2}{}}
+\citation{bergmann2023anomaly}
+\citation{liu2023real3d}
+\citation{zhu2024towards}
+\citation{li2024towards}
+\citation{li2024towards}
+\citation{bergmann2023anomaly}
+\citation{liu2023real3d}
+\citation{zhu2024towards}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Qualitative results on the newly collected Anomaly-ShapeNet \cite  {li2024towards}. From left to right: input point clouds and ground truth annotations of anomalous points in red, and anomaly scores for each 3D point predicted by the proposed method.\relax }}{11}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:shapenet}{{3}{11}{Qualitative results on the newly collected Anomaly-ShapeNet \cite {li2024towards}. From left to right: input point clouds and ground truth annotations of anomalous points in red, and anomaly scores for each 3D point predicted by the proposed method.\relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Evaluation Metrics}{11}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Qualitative results on Real3D-AD dataset. From left to right: input point clouds, Ground truth annotations of anomalous points in red, and anomaly scores for each 3D point predicted by the proposed method.\relax }}{12}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:real3d}{{4}{12}{Qualitative results on Real3D-AD dataset. From left to right: input point clouds, Ground truth annotations of anomalous points in red, and anomaly scores for each 3D point predicted by the proposed method.\relax }{figure.caption.9}{}}
+\citation{bergmann2023anomaly}
+\citation{liu2023real3d}
+\citation{zhu2024towards}
+\citation{li2024towards}
+\citation{zhou2024r3d}
+\citation{horwitz2023back}
+\citation{rusu2009fast}
+\citation{wang2023multimodal}
+\citation{pang2022masked}
+\citation{yu2022point}
+\citation{rusu2009fast}
+\citation{roth2022towards}
+\citation{pang2022masked}
+\citation{zhu2024towards}
+\citation{wang2023multimodal}
+\citation{yu2022point}
+\citation{bergmann2023anomaly}
+\citation{bergmann2023anomaly}
+\citation{liu2023real3d}
+\citation{zhu2024towards}
+\citation{li2024towards}
+\citation{zhou2024r3d}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Average Results on Real3D-AD.\relax }}{13}{table.caption.10}\protected@file@percent }
+\newlabel{tab:Real3D}{{1}{13}{Average Results on Real3D-AD.\relax }{table.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Result}{13}{subsection.3.4}\protected@file@percent }
+\citation{zhu2024towards}
+\citation{zhou2024r3d}
+\citation{roth2022towards}
+\citation{liu2023real3d}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Performance comparison on the newly collected Industrial3D-AD dataset in terms of point-level and object-level AUROC, AUPR, and inference speed (FPS).\relax }}{14}{table.caption.11}\protected@file@percent }
+\newlabel{tab:Industrial3D}{{2}{14}{Performance comparison on the newly collected Industrial3D-AD dataset in terms of point-level and object-level AUROC, AUPR, and inference speed (FPS).\relax }{table.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Ablation Study}{14}{subsection.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Object- and point-level performance comparison across 22 test objects. Four line plots show (top left) point-level AUROC, (top right) point-level AUPR, (bottom left) object-level AUROC, and (bottom right) object-level AUPR for the full model (black solid) and three ablated variants (- SCA in red dashed; - FA in blue dash-dot; no pretraining in gray dashed).\relax }}{15}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:ablation}{{5}{15}{Object- and point-level performance comparison across 22 test objects. Four line plots show (top left) point-level AUROC, (top right) point-level AUPR, (bottom left) object-level AUROC, and (bottom right) object-level AUPR for the full model (black solid) and three ablated variants (- SCA in red dashed; - FA in blue dash-dot; no pretraining in gray dashed).\relax }{figure.caption.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Ablation Study: Average Results Across Datasets (AFG always present).\relax }}{16}{table.caption.13}\protected@file@percent }
+\newlabel{tab:Ablation}{{3}{16}{Ablation Study: Average Results Across Datasets (AFG always present).\relax }{table.caption.13}{}}
+\bibstyle{elsarticle-num}
+\bibdata{cas-refs}
+\bibcite{venkataramanan2020attention}{{1}{}{{}}{{}}}
+\bibcite{ding2022catching}{{2}{}{{}}{{}}}
+\bibcite{chadha2019comparison}{{3}{}{{}}{{}}}
+\bibcite{chu2020neural}{{4}{}{{}}{{}}}
+\bibcite{shi2021dfr}{{5}{}{{}}{{}}}
+\bibcite{hou2021divide}{{6}{}{{}}{{}}}
+\bibcite{zavrtanik2021draem}{{7}{}{{}}{{}}}
+\bibcite{zavrtanik2022dsr}{{8}{}{{}}{{}}}
+\bibcite{de2022masked}{{9}{}{{}}{{}}}
+\bibcite{yao2023focus}{{10}{}{{}}{{}}}
+\bibcite{luo2024ami}{{11}{}{{}}{{}}}
+\bibcite{zhang2023unsupervised}{{12}{}{{}}{{}}}
+\bibcite{lu2023removing}{{13}{}{{}}{{}}}
+\bibcite{tebbe2024dynamic}{{14}{}{{}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusion}{17}{section.4}\protected@file@percent }
+\bibcite{bergmann2020uninformed}{{15}{}{{}}{{}}}
+\bibcite{salehi2021multiresolution}{{16}{}{{}}{{}}}
+\bibcite{wan2022unsupervised}{{17}{}{{}}{{}}}
+\bibcite{gu2023remembering}{{18}{}{{}}{{}}}
+\bibcite{tong2024enhanced}{{19}{}{{}}{{}}}
+\bibcite{defard2021padim}{{20}{}{{}}{{}}}
+\bibcite{roth2022towards}{{21}{}{{}}{{}}}
+\bibcite{bae2023pni}{{22}{}{{}}{{}}}
+\bibcite{zuo2024reconstruction}{{23}{}{{}}{{}}}
+\bibcite{hyun2024reconpatch}{{24}{}{{}}{{}}}
+\bibcite{li2021cutpaste}{{25}{}{{}}{{}}}
+\bibcite{liu2023simplenet}{{26}{}{{}}{{}}}
+\bibcite{fang2023fastrecon}{{27}{}{{}}{{}}}
+\bibcite{zhang2024realnet}{{28}{}{{}}{{}}}
+\bibcite{horwitz2023back}{{29}{}{{}}{{}}}
+\bibcite{cao2024complementary}{{30}{}{{}}{{}}}
+\bibcite{wang2023multimodal}{{31}{}{{}}{{}}}
+\bibcite{rudolph2023asymmetric}{{32}{}{{}}{{}}}
+\bibcite{bergmann2023anomaly}{{33}{}{{}}{{}}}
+\bibcite{liu2023real3d}{{34}{}{{}}{{}}}
+\bibcite{zhu2024towards}{{35}{}{{}}{{}}}
+\bibcite{li2024towards}{{36}{}{{}}{{}}}
+\bibcite{zhou2024r3d}{{37}{}{{}}{{}}}
+\bibcite{gu2020hippo}{{38}{}{{}}{{}}}
+\bibcite{gu2021efficiently}{{39}{}{{}}{{}}}
+\bibcite{gu2021combining}{{40}{}{{}}{{}}}
+\bibcite{gu2022parameterization}{{41}{}{{}}{{}}}
+\bibcite{smith2022simplified}{{42}{}{{}}{{}}}
+\bibcite{vaswani2017attention}{{43}{}{{}}{{}}}
+\bibcite{zhu2024vision}{{44}{}{{}}{{}}}
+\bibcite{liu2024vmamba}{{45}{}{{}}{{}}}
+\bibcite{guo2024mambair}{{46}{}{{}}{{}}}
+\bibcite{liang2024pointmamba}{{47}{}{{}}{{}}}
+\bibcite{han2024mamba3d}{{48}{}{{}}{{}}}
+\bibcite{zha2024lcm}{{49}{}{{}}{{}}}
+\bibcite{pang2022masked}{{50}{}{{}}{{}}}
+\bibcite{chang2015shapenet}{{51}{}{{}}{{}}}
+\bibcite{rusu2009fast}{{52}{}{{}}{{}}}
+\bibcite{yu2022point}{{53}{}{{}}{{}}}
+\csxdef{lastpage}{19}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers
+\gdef \@abspage@last{19}
