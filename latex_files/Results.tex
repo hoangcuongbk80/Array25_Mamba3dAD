@@ -80,65 +80,68 @@ At the \textbf{object level}, each point cloud is treated as a single instance. 
 
 \begin{table}[ht]
 \centering
-\caption{Average Results on Real3D-AD.}
-\label{tab:Real3D}
+\caption{Average Result (\%) on Anomaly-ShapeNet dataset.}
+\label{tab:ShapeNet}
 \begin{tabular}{l|cc|cc|c}
 \hline
-& \multicolumn{2}{c|}{Point Level} & \multicolumn{2}{c|}{Object Level} & Speed \\
+& \multicolumn{2}{c|}{Point Level (\%)} & \multicolumn{2}{c|}{Object Level (\%)} & Speed \\
 \hline
 & AUROC & AUPR & AUROC & AUPR & FPS \\ 
 \hline
-BTF(Raw)                            & 0.571 & 0.022 & 0.603 & 0.611  & 2.05 \\
-BTF(FPFH)                           & 0.730 & 0.064 & 0.635 & 0.614  & 1.01 \\
-M3DM(PointMAE)                      & 0.637 & 0.046 & 0.552 & 0.572  & 0.30 \\
-M3DM(PointBERT)                     & 0.636 & 0.052 & 0.538 & 0.581  & 0.50 \\
-PatchCore(FPFH)                     & 0.577 & 0.071 & 0.593 & 0.591  & 0.09 \\
-PatchCore(FPFH+Raw)                 & 0.680 & 0.123 & 0.682 & 0.667  & 0.09 \\
-PatchCore(PointMAE)                 & 0.642 & 0.058 & 0.594 & 0.633  & 0.10 \\
-3D-ST \cite{bergmann2023anomaly}    & 0.705 & 0.109 & 0.645 & 0.723  & 1.50 \\
-Reg3D-AD \cite{liu2023real3d}      & 0.705 & 0.109 & 0.704 & 0.723  & 0.08 \\
-Group3AD   \cite{zhu2024towards}    & 0.735 & 0.137 & 0.751 & 0.740  & 2.50 \\
-IMRNet   \cite{li2024towards}       & 0.725 & 0.166 & 0.725 & 0.625  & 5.60 \\
-R3D-AD   \cite{zhou2024r3d}         & 0.592 & 0.041 & 0.734 & 0.632  & 7.12 \\
-Ours                                & 0.763 & 0.194 & 0.781 & 0.775 & 13.52 \\
+BTF(Raw)                            & 55.2 & 16.4  & 49.5 & 57.4  & 2.09 \\ 
+BTF(FPFH)                           & 63.0 & 21.0  & 53.1 & 61.0  & 1.16 \\ 
+M3DM(PointMAE)                      & 61.8 & 21.5  & 55.4 & 61.4  & 0.31 \\ 
+M3DM(PointBERT)                     & 60.3 & 19.5  & 53.7 & 59.6  & 0.52 \\ 
+PatchCore(FPFH)                     & 58.2 & 21.1  & 57.1 & 61.0  & 0.10 \\ 
+PatchCore(FPFH+Raw)                 & 60.4 & 22.3  & 58.6 & 63.2  & 0.10 \\ 
+PatchCore(PointMAE)                 & 57.9 & 19.4  & 56.4 & 59.3  & 0.12 \\ 
+Reg3D-AD \cite{liu2023real3d}       & 67.0 & 20.3  & 57.4 & 70.3  & 0.10 \\ 
+3D-ST \cite{bergmann2023anomaly}    & 63.6 & 22.6  & 60.7 & 60.5  & 1.52 \\
+Group3AD \cite{zhu2024towards}      & 84.6 & 25.4  & 81.4 & 95.3  & 2.55 \\ 
+IMRNet \cite{li2024towards}         & 65.3 & 22.8  & 66.3 & 72.7  & 5.62 \\
+R3D-AD \cite{zhou2024r3d}           & 75.1 & 23.7  & 75.2 & 73.6  & 7.15 \\
+Ours                                & 91.2 & 38.7  & 86.8 & 98.7  & 17.31 \\
 \hline
 \end{tabular}
 \end{table}
 
 %-------------------------------------------------------
+
+%-------------------------------------------------------
+
+\begin{table}[ht]
+\centering
+\caption{Average Results (\%) on Real3D-AD dataset.}
+\label{tab:Real3D}
+\begin{tabular}{l|cc|cc|c}
+\hline
+& \multicolumn{2}{c|}{Point Level (\%)} & \multicolumn{2}{c|}{Object Level (\%)} & Speed \\
+\hline
+& AUROC & AUPR & AUROC & AUPR & FPS \\ 
+\hline
+BTF(Raw)                            & 57.3 & 2.4 & 60.5 & 61.3  & 2.05 \\
+BTF(FPFH)                           & 73.2 & 6.6 & 63.7 & 61.6  & 1.01 \\
+M3DM(PointMAE)                      & 63.9 & 4.9 & 55.4 & 57.5  & 0.31 \\
+M3DM(PointBERT)                     & 63.9 & 5.4 & 54.0 & 58.3  & 0.52 \\
+PatchCore(FPFH)                     & 57.9 & 7.3 & 59.6 & 59.3  & 0.10 \\
+PatchCore(FPFH+Raw)                 & 68.2 & 12.5 & 68.4 & 66.9  & 0.10 \\
+PatchCore(PointMAE)                 & 64.5 & 6.0 & 59.6 & 63.6  & 0.12 \\
+Reg3D-AD \cite{liu2023real3d}       & 70.7 & 11.1 & 70.7 & 72.6  & 0.10 \\
+3D-ST \cite{bergmann2023anomaly}    & 70.7 & 11.1 & 64.8 & 72.6  & 1.52 \\
+Group3AD   \cite{zhu2024towards}    & 73.8 & 13.9 & 75.3 & 74.3  & 2.55 \\
+IMRNet   \cite{li2024towards}       & 72.8 & 16.8 & 72.8 & 62.8  & 5.62 \\
+R3D-AD   \cite{zhou2024r3d}         & 59.4 & 4.3 & 73.6 & 63.5  & 7.15 \\
+Ours                                & 76.6 & 19.7 & 78.4 & 77.7 & 17.31 \\
+\hline
+\end{tabular}
+\end{table}
+
+%-------------------------------------------------------
+
 
 Figures \ref{fig:result1} and \ref{fig:result2} present qualitative segmentation results on the Real3D-AD and Industrial3D-AD benchmarks, respectively, illustrating the model's ability to localize both bulges and sinks in high-precision scans and to robustly highlight subtle scratches, dents, and occlusion-induced artifacts under factory-like capture conditions. Table \ref{tab:Real3D} presents a comparison between the proposed method and state-of-the-art approaches. BTF(Raw) refers to the use of only the raw 3D coordinate features (x, y, z) within the Back-to-Front (BTF) framework \cite{horwitz2023back}. In contrast, BTF(FPFH) augments the same pipeline with Fast Point Feature Histograms (FPFH) \cite{rusu2009fast}. The entries M3DM(PointMAE) and M3DM(PointBERT) correspond to the model \cite{wang2023multimodal} configured to ignore its RGB branch and instead extract point cloud features with PointMAE \cite{pang2022masked} or PointBERT \cite{yu2022point}, respectively. For PatchCore variants, PatchCore(FPFH) replaces the usual ResNet-based feature extractor with FPFH descriptors \cite{rusu2009fast} before feeding them into the PatchCore anomaly scoring pipeline \cite{roth2022towards}. PatchCore(FPFH+Raw) further concatenates the raw spatial coordinates to each FPFH feature vector, and PatchCore(PointMAE) uses the PointMAE network \cite{pang2022masked} as the backbone feature extractor within the PatchCore framework.
 
 At the point level, our model achieves an AUROC of 0.763 and an AUPR of 0.194, improving over the previous best, Group3AD \cite{zhu2024towards}, which attains 0.735 AUROC and 0.137 AUPR, by +2.8\% and +5.7\%, respectively. Notably, simpler baselines such as BTF(Raw) and BTF(FPFH) remain far behind (AUROC 0.571 and 0.730), indicating the necessity of integrating learned spatialdescriptor representations rather than relying solely on raw coordinates or hand-crafted FPFH features. At the object level, we observe a similar margin of improvement: our method yields an AUROC of 0.781 and an AUPR of 0.775, compared to Group3AD's 0.751 AUROC and 0.740 AUPR, corresponding to gains of +3.0\% and +3.5\%. Transformer-based or distillation-based approaches such as M3DM(PointMAE) \cite{wang2023multimodal}, M3DM(PointBERT) \cite{yu2022point}, and 3D-ST \cite{bergmann2023anomaly} show competitive localization accuracy but do not surpass our framework's balanced precision-recall trade-off, particularly in recall, as evidenced by their lower AUPR scores. 
-
-%-------------------------------------------------------
-\begin{table}[ht]
-\centering
-\caption{Performance comparison on the newly collected Industrial3D-AD dataset in terms of point-level and object-level AUROC, AUPR, and inference speed (FPS).}
-\label{tab:Industrial3D}
-\begin{tabular}{l|cc|cc|c}
-\hline
-& \multicolumn{2}{c|}{Point Level} & \multicolumn{2}{c|}{Object Level} & Speed \\
-\hline
-& AUROC & AUPR & AUROC & AUPR & FPS \\
-\hline
-BTF(Raw)                            & 0.545 & 0.021 & 0.577 & 0.585  & 2.05 \\
-BTF(FPFH)                           & 0.702 & 0.061 & 0.610 & 0.586  & 1.01 \\
-M3DM(PointMAE)                      & 0.612 & 0.044 & 0.528 & 0.545  & 0.30 \\
-M3DM(PointBERT)                     & 0.608 & 0.049 & 0.512 & 0.553  & 0.50 \\
-PatchCore(FPFH)                     & 0.548 & 0.068 & 0.563 & 0.561  & 0.09 \\
-PatchCore(FPFH+Raw)                 & 0.648 & 0.117 & 0.650 & 0.637  & 0.09 \\
-PatchCore(PointMAE)                 & 0.615 & 0.055 & 0.567 & 0.604  & 0.10 \\
-3D-ST \cite{bergmann2023anomaly}  & 0.670 & 0.104 & 0.614 & 0.689  & 1.50 \\
-Reg3D-AD \cite{liu2023real3d}     & 0.678 & 0.104 & 0.670 & 0.690  & 0.08 \\
-Group3AD \cite{zhu2024towards}    & 0.701 & 0.131 & 0.716 & 0.708  & 2.50 \\
-IMRNet \cite{li2024towards}       & 0.691 & 0.158 & 0.691 & 0.597  & 5.60 \\
-R3D-AD \cite{zhou2024r3d}         & 0.563 & 0.039 & 0.699 & 0.603  & 7.12 \\
-Ours                                & 0.730 & 0.184 & 0.744 & 0.741 & 13.52 \\
-\hline
-\end{tabular}
-\end{table}
-%-------------------------------------------------------
 
 Table \ref{tab:Industrial3D} shows results on our newly collected Industrial3D-AD dataset, which features a wider range of component geometries, finer defect scales, and material surface variations compared to Real3D-AD. At the point level, our method achieves 0.730 AUROC and 0.184 AUPR, outperforming the strongest baseline, Group3AD \cite{zhu2024towards} (0.701 AUROC, 0.131 AUPR), by +2.9\% and +5.3\%. However, these scores are slightly lower than on Real3D-AD (0.763 AUROC, 0.194 AUPR), reflecting the increased challenge of detecting subtle anomalies on shiny or reflective industrial surfaces and irregular sensor noise patterns. At the object level, we observe 0.744 AUROC and 0.741 AUPR, again surpassing Group3AD (0.716 AUROC, 0.708 AUPR) by +2.8\% and +3.3\%, but trailing our Real3D-AD result (0.781 AUROC, 0.775 AUPR). The relative drop (4\% in AUROC and 3\% in AUPR) can be attributed to two factors: (1) the higher within-class variance in industrial parts, where small scratches or dents produce weaker point-wise cues that diffuse across object boundaries and (2) more pronounced domain shift between training and test partitions. New materials and lighting conditions appear in the evaluation split.
 

@@ -3,19 +3,19 @@
 \begin{figure}[h!]
   \centering 
     \includegraphics[width=0.98\linewidth]{figs/overview}
-  \caption{Overview of the 3D anomaly detection pipeline.}
+  \caption{Overview of the proposed 3D anomaly detection pipeline.}
   \label{fig:overview}
 \end{figure}
 
-Given an input point cloud \(\mathcal{P} = \{\mathbf{p}_i \in \mathbb{R}^3\}_{i=1}^N\), the proposed framework leverages a frozen pre-trained point-cloud Transformer and a small set of lightweight trainable adapters to obtain spatially coherent and anomaly-sensitive representations. The Transformer backbone consists of \(L\) encoder layers, each producing \(M\) patch tokens of dimension \(D\). We denote the patch-token matrix and class token at Transformer layer \(i\) as \(\mathbf{T}_i \in \mathbb{R}^{M\times D}\) and \(c_i \in \mathbb{R}^{1\times D}\), respectively. Collectively, the hierarchical token set is \(\mathbf{T} = \{\mathbf{T}_1, \dots, \mathbf{T}_L\}\) with a total of \(T = L\cdot M\) tokens. Our goal is to transform these unordered layer-wise tokens into a semantically ordered sequence \(\mathbf{T}_{\mathrm{ord}}\in\mathbb{R}^{T\times D}\) via the proposed \textbf{Geometric Semantic-Aware Sorter (GSAS)}, fuse them using a state-space adapter (Mamba) to produce enriched contextual features \(y_{1:T}\in\mathbb{R}^{T\times D}\), and finally apply a lightweight attention-based discriminator for per-patch anomaly localization. To maintain parameter efficiency, all Transformer weights remain frozen; only the GSAS, Mamba adapters, the selective anomalous feature generator, and the cross-patch attention discriminator are trainable.
+We address efficient 3D anomaly detection that requires minimal task-specific training while preserving geometric structure and long-range contextual reasoning. As illustrated in Figure \ref{fig:overview}, given an input point cloud \(\mathcal{P} = \{\mathbf{p}_i \in \mathbb{R}^3\}_{i=1}^N\), the proposed pipeline leverages a frozen pre-trained point-cloud Transformer together with a compact set of lightweight adapters to generate spatially coherent and anomaly-sensitive representations. The backbone consists of \(L\) encoder layers, each producing \(M\) patch tokens of dimension \(D\); we denote the patch-token matrix and class token at layer \(i\) as \(\mathbf{T}_i \in \mathbb{R}^{M\times D}\) and \(c_i \in \mathbb{R}^{1\times D}\), respectively, and collect the hierarchical token set \(\mathbf{T} = \{\mathbf{T}_1, \dots, \mathbf{T}_L\}\) with a total of \(T = L \cdot M\) tokens. These unordered layer-wise tokens are transformed into a semantically ordered sequence \(\mathbf{T}_{\mathrm{ord}} \in \mathbb{R}^{T\times D}\), subsequently fused into enriched contextual features \(y_{1:T} \in \mathbb{R}^{T\times D}\), and finally scored by a lightweight attention-based discriminator for per-patch anomaly localization. The geometric semantic-aware sorter (GSAS) establishes a differentiable soft-permutation that orders the hierarchical tokens while preserving geometric locality and semantic consistency. The Mamba adapter, a linear-time state-space model, efficiently fuses the ordered sequence to yield context-enhanced features \(y_{1:T}\) that retain both local fidelity and global awareness. A selective anomaly generator operates during training to inject sparse feature-space perturbations, enabling effective supervision without real defect labels. The cross-patch discriminator then aggregates contextual cues through a compact attention mechanism to output patch-level anomaly logits, which are reprojected to points for precise localization. 
 
 \subsection{Backbone}
 
-Local patch extraction is performed once per input cloud and the resulting patch identities are preserved across Transformer layers. Specifically, we apply Farthest Point Sampling (FPS) to select \(M\) patch centers \(\{p_j\in\mathbb{R}^3\}_{j=1}^M\) (indices \(j\) refer to patch centers), and for each center we collect a fixed-size local neighborhood via \(K\)-nearest neighbors (KNN). Each neighborhood is embedded by a lightweight PointNet encoder followed by a small positional-encoding MLP to produce an initial patch embedding \(x_j^{(0)}\in\mathbb{R}^D\). These \(M\) patch embeddings (plus a global class token) are then fed into the frozen Point-MAE Transformer~\cite{pang2022masked} pre-trained on ShapeNet~\cite{chang2015shapenet}. Formally, the \(i\)-th Transformer block \(\ell_i(\cdot)\) computes
+Given an input point cloud \(\mathcal{P} = \{\mathbf{p}_i\in\mathbb{R}^3\}_{i=1}^N\), the backbone produces local patch embeddings and a hierarchical set of Transformer tokens that preserve patch identities across layers. We apply Farthest Point Sampling (FPS) to select \(M\) patch centers \(\{p_j\in\mathbb{R}^3\}_{j=1}^M\), where index \(j\) denotes a patch center, and for each center we collect a fixed-size neighborhood of \(K\) points via \(K\)-nearest neighbors (KNN). Each neighborhood is embedded by a lightweight PointNet encoder followed by a positional-encoding MLP to yield an initial patch embedding \(x_j^{(0)}\in\mathbb{R}^D\), for \(j=1,\dots,M\). The \(M\) initial embeddings are concatenated with a global class token \(c_0\in\mathbb{R}^{1\times D}\) to form the Transformer input \([c_0;\mathbf{T}_0]\), where \(\mathbf{T}_0=[x_1^{(0)};\dots;x_M^{(0)}]\in\mathbb{R}^{M\times D}\). These are passed to the frozen Point-MAE Transformer pretrained on ShapeNet~\cite{pang2022masked,chang2015shapenet}. Formally, the \(i\)-th Transformer block \(\ell_i(\cdot)\) computes
 \begin{equation}
 [c_i;\,\mathbf{T}_i] \;=\; \ell_i([c_{i-1};\,\mathbf{T}_{i-1}]), \qquad i=1,\dots,L,
 \end{equation}
-where \(\mathbf{T}_i = [t_{i,1};\dots;t_{i,M}]\in\mathbb{R}^{M\times D}\) and \(c_i\in\mathbb{R}^{1\times D}\). Importantly, the spatial coordinates \(\{p_j\}\) (the patch centers) are associated with the corresponding patch index \(j\) and are reused for all Transformer layers, so that token \(t_{i,j}\) at layer \(i\) corresponds to the same geometric patch center \(p_j\).
+with \(\mathbf{T}_i=[t_{i,1};\dots;t_{i,M}]\in\mathbb{R}^{M\times D}\) and \(c_i\in\mathbb{R}^{1\times D}\). The spatial coordinates \(\{p_j\}\) remain associated with their patch index \(j\) and are reused at every Transformer layer; consequently token \(t_{i,j}\) at layer \(i\) corresponds to the same geometric patch center \(p_j\). The backbone therefore outputs the initial patch embeddings \(\{x_j^{(0)}\}_{j=1}^M\) with \(x_j^{(0)}\in\mathbb{R}^D\), the hierarchical tokens \(\{\mathbf{T}_i\}_{i=1}^L\) with \(\mathbf{T}_i\in\mathbb{R}^{M\times D}\), the sequence of class tokens \(\{c_i\}_{i=1}^L\) with \(c_i\in\mathbb{R}^{1\times D}\), and the retained patch centers \(\{p_j\}_{j=1}^M\in\mathbb{R}^3\). Optionally, these tokens may be viewed as a flattened set \(\mathbf{T}=\{\mathbf{T}_1,\dots,\mathbf{T}_L\}\) of \(T=L\cdot M\) tokens in \(\mathbb{R}^{T\times D}\).
 
 \subsection{Geometric Semantic-Aware Sorter (GSAS)}
 \label{sec:gsas}
@@ -23,72 +23,54 @@ where \(\mathbf{T}_i = [t_{i,1};\dots;t_{i,M}]\in\mathbb{R}^{M\times D}\) and \(
 \begin{figure}[h!]
   \centering 
     \includegraphics[width=0.98\linewidth]{figs/GSAS}
-  \caption{GSAS.}
+  \caption{Overview of geometric semantic-aware sorter (GSAS).}
   \label{fig:GSAS}
 \end{figure}
 
-Point clouds admit no canonical linear ordering in \(\mathbb{R}^3\); nevertheless, sequence models (e.g., state-space architectures) require an ordered input. The Geometric Semantic-Aware Sorter (GSAS) produces a differentiable, geometry- and semantics-aware ordering of the full set of Transformer patch tokens such that the resulting ordered sequence preserves local surface adjacency and semantic affinity while remaining end-to-end trainable. Below we give a precise, dimensionally consistent description of GSAS and the auxiliary regularizers that prevent degenerate assignments.
+Given input tokens \(X\in\mathbb{R}^{T\times D}\), where \(X\) denotes the flattened collection of all per-layer tokens \(t_{i,j}\) produced by the backbone (so that each \(\mathbf{T}_i=[t_{i,1};\dots;t_{i,M}]\in\mathbb{R}^{M\times D}\) and \(T=L\cdot M\)), and given the unique patch centers \(\{p_j\in\mathbb{R}^3\}_{j=1}^M\), GSAS produces a differentiable ordering of the \(T\) tokens that preserves local surface adjacency and semantic affinity. As illustrated in Figure ~\ref{fig:GSAS}, we first summarizes local geometry and same-layer semantics, then computes token-slot affinities, converts affinities to an approximately doubly-stochastic assignment, and finally aggregates tokens into ordered slots for downstream fusion.
 
-We assume patch extraction (FPS + KNN) is performed once per input cloud and that the resulting \(M\) unique patch centers \(\{p_j\in\mathbb{R}^3\}_{j=1}^M\) are reused across Transformer layers. The frozen Transformer produces per-layer patch tokens \(t_{i,j}\in\mathbb{R}^D\) for layer \(i\in\{1,\dots,L\}\) and patch index \(j\in\{1,\dots,M\}\). We enumerate the full set of \(T=L\cdot M\) tokens with a single global index \(t\in\{1,\dots,T\}\) via a bijection \((i,j)\mapsto t\) (and denote the inverse mappings \(i(t), j(t)\) when needed). The patch center associated with global token \(t\) is therefore \(p_{j(t)}\) (and we may write \(p_t\) as shorthand, noting \(p_t = p_{j(t)}\)). GSAS maps the unordered set \(\{t_{i,j}\}\) to an ordered sequence \(\mathbf{T}_{\mathrm{ord}}\in\mathbb{R}^{T\times D}\) using a differentiable soft-permutation matrix \(P\in[0,1]^{T\times T}\) (rows = tokens, columns = ordered slots).
-
-\paragraph{Permutation-invariant local descriptors (graph-on-patches, within-layer aggregation).}
-Construct a kNN graph on the unique patch centers \(\{p_j\}_{j=1}^M\); denote the neighbor set of patch \(j\) by \(\mathcal{N}_{\mathrm{patch}}(j)\subset\{1,\dots,M\}\). For a given token \(t\) corresponding to \((i,j)\) (i.e., \(i=i(t), j=j(t)\)), we compute a permutation-invariant local descriptor by aggregating features from the same Transformer layer \(i\) of neighboring patches (i.e., tokens \(t_{i,u}\) for \(u\in\mathcal{N}_{\mathrm{patch}}(j)\)). Explicitly:
+We construct a kNN graph on the unique patch centers and denotes the neighbor set of patch \(j\) by \(\mathcal{N}_{\mathrm{patch}}(j)\subset\{1,\dots,M\}\). For a token \(t\) corresponding to \((i,j)\) with \(i=i(t)\) and \(j=j(t)\), GSAS computes a permutation-invariant local descriptor by aggregating features from the same Transformer layer \(i\) of neighboring patches:
 \begin{equation}
 u_{i,j} \;=\; \mathrm{MaxPool}\Big(\big\{\,W_{\downarrow}\,t_{i,u} + b_{\downarrow} \ \big|\ u\in\mathcal{N}_{\mathrm{patch}}(j)\big\}\Big)\in\mathbb{R}^{d_a},
 \end{equation}
-where \(t_{i,u}\in\mathbb{R}^D\) is the token at layer \(i\) of neighbor patch \(u\), \(W_{\downarrow}\in\mathbb{R}^{d_a\times D}\), \(b_{\downarrow}\in\mathbb{R}^{d_a}\), and the MaxPool is element-wise across the neighbor set. Using the bijection \((i,j)\!\mapsto\! t\) we set \(E_{t,:}=u_{i(t),j(t)}\) to collect descriptors into \(E\in\mathbb{R}^{T\times d_a}\).
-
-\paragraph{Token-slot affinities and differentiable soft-permutation.}
-We set the number of ordered slots equal to the total token count, \(S_{\mathrm{slots}}=T\). The raw token-slot logits (affinities) are computed as
+where \(W_{\downarrow}\in\mathbb{R}^{d_a\times D}\) and \(b_{\downarrow}\in\mathbb{R}^{d_a}\). The module collects these descriptors into \(E\in\mathbb{R}^{T\times d_a}\) by setting \(E_{t,:}=u_{i(t),j(t)}\). The descriptor \(E\) summarizes local geometry while preserving layer-specific semantics, and GSAS uses \(E\) to inform the affinity computation in the next step. We computes raw token-slot affinities from the descriptors:
 \begin{equation}
 \mathbf{G} \;=\; E\,W_{\uparrow} + \mathbf{1}\,b_{\uparrow}^\top \in\mathbb{R}^{T\times T},
 \end{equation}
-where \(W_{\uparrow}\in\mathbb{R}^{d_a\times T}\), \(b_{\uparrow}\in\mathbb{R}^T\), and \(\mathbf{1}\in\mathbb{R}^{T\times 1}\) is an all-ones column. Entry \(\mathbf{G}_{t,s}\) is the unnormalized affinity of token \(t\) to ordered slot \(s\).
+with \(W_{\uparrow}\in\mathbb{R}^{d_a\times T}\), \(b_{\uparrow}\in\mathbb{R}^T\), and \(\mathbf{1}\in\mathbb{R}^{T\times 1}\). The matrix \(\mathbf{G}\) encodes unnormalized affinities between tokens and ordered slots, and GSAS processes \(\mathbf{G}\) to produce a differentiable assignment that can be optimized end-to-end.
 
-To obtain a differentiable approximately-permutation matrix we apply temperature-scaled exponentiation followed by the Sinkhorn operator. For numeric stability subtract the column-wise maximum before exponentiation: let \(v\in\mathbb{R}^T\) be the vector with entries \(v_s=\max_{t}\mathbf{G}_{t,s}\). Then
+For numerical stability we subtract the column-wise maximum \(v\in\mathbb{R}^T\) with entries \(v_s=\max_t \mathbf{G}_{t,s}\), applies temperature scaling and exponentiation, and normalizes with the Sinkhorn operator:
 \begin{equation}
-\tilde{\mathbf{G}} \;=\; (\mathbf{G} - \mathbf{1}\,v^\top)/\tau \in\mathbb{R}^{T\times T},
-\quad\text{and}\quad
+\tilde{\mathbf{G}} \;=\; (\mathbf{G} - \mathbf{1}\,v^\top)/\tau,
+\end{equation}
+\begin{equation}
 P \;=\; \mathrm{Sinkhorn}\big(\exp(\tilde{\mathbf{G}}),\,K_{\mathrm{sink}}\big)\in[0,1]^{T\times T},
 \end{equation}
-where \(\tau>0\) is a temperature (smaller \(\tau\) yields sharper assignments) and \(\mathrm{Sinkhorn}(\cdot,K_{\mathrm{sink}})\) denotes \(K_{\mathrm{sink}}\) iterations of alternating row- and column-normalization producing an (approximately) doubly-stochastic matrix. During training this soft-permutation is differentiable; at inference time one may optionally discretize \(P\) (e.g., via the Hungarian algorithm on \(-\mathbf{G}\)) if a hard permutation is required.
-
-\paragraph{Weighted aggregation into ordered slots.}
-Given the token feature matrix \(X\in\mathbb{R}^{T\times D}\) with rows \(X_t=t_{i(t),j(t)}\), the ordered-token matrix is obtained by weighted aggregation into slots:
+where \(\tau>0\) denotes the temperature and \(K_{\mathrm{sink}}\) the number of iterations. The soft-permutation \(P\) is approximately doubly-stochastic and differentiable, and GSAS uses \(P\) to aggregate token features into a semantically coherent ordered sequence. We aggregate tokens into ordered slots by weighted summation:
 \begin{equation}
-\mathbf{T}_{\mathrm{ord}} \;=\; P^\top X \in\mathbb{R}^{T\times D},\qquad
+\mathbf{T}_{\mathrm{ord}} \;=\; P^\top X \in\mathbb{R}^{T\times D},
+\end{equation}
+\begin{equation}
 \mathbf{T}_{\mathrm{ord}}[s,:]=\sum_{t=1}^T P_{t,s}\,X_t.
 \end{equation}
-Because \(P\) is (approximately) doubly-stochastic, this yields one feature vector per ordered slot; the weighted aggregation is differentiable so gradients propagate to all GSAS parameters \(W_{\downarrow},b_{\downarrow},W_{\uparrow},b_{\uparrow}\).
+The aggregation yields one feature vector per ordered slot while preserving differentiability so that gradients propagate to \(W_{\downarrow},b_{\downarrow},W_{\uparrow},b_{\uparrow}\). The ordered tokens \( \mathbf{T}_{\mathrm{ord}}\) therefore provide the contiguous, semantically coherent input required by the subsequent fusion module.
 
-\paragraph{Auxiliary regularizers for locality and assignment sharpness.}
-To avoid degenerate (diffuse or collapsed) assignments and to encourage geometric locality in the induced order we add two auxiliary regularizers.
-
-\textbf{Entropy penalty.} A column-wise entropy penalty discourages diffuse assignments into a given slot:
+We include two auxiliary regularizers to prevent degenerate assignments and to encourage geometric locality. The column-wise entropy penalty discourages diffuse assignments into a given slot:
 \begin{equation}
 \mathcal{L}_{\mathrm{ent}} \;=\; \frac{1}{T}\sum_{s=1}^T H(P_{:,s}),\qquad
 H(\pi)=-\sum_{t}\pi_t\log(\pi_t+\epsilon_{\mathrm{ent}}),
 \end{equation}
-where \(\epsilon_{\mathrm{ent}}>0\) is a small constant for numerical stability (and the natural logarithm is used). This term encourages each slot to receive a concentrated assignment.
-
-\textbf{Locality penalty (normalized).} Let \(\tilde s = \dfrac{s-1}{\max(1,T-1)}\in[0,1]\) denote the normalized slot coordinate (so slot positions are scale-invariant to \(T\) and safely defined when \(T=1\)), and define the expected (normalized) slot index for token \(t\) as
+with \(\epsilon_{\mathrm{ent}}>0\) for numerical stability. The entropy penalty directly biases the columns of \(P\) toward concentrated assignments and thus improves the quality of aggregation in Eq. for \(\mathbf{T}_{\mathrm{ord}}\). The locality penalty measures expected slot positions \(\mu_t\) and biases them to align with geometric affinities:
 \begin{equation}
-\mu_t \;=\; \sum_{s=1}^T \tilde s\, P_{t,s} \in [0,1].
+\mu_t \;=\; \sum_{s=1}^T \tilde s\,P_{t,s}\in[0,1],
 \end{equation}
-Denote by \(j(t)\) the patch index associated with token \(t\). Define a geometric affinity between patches via
 \begin{equation}
 w_{t,u} \;=\; \exp\!\big(-\|p_{j(t)}-p_{j(u)}\|^2/\sigma_p^2\big),
 \end{equation}
-where \(\sigma_p\) is a bandwidth parameter. To avoid density bias we average the locality penalty per token:
 \begin{equation}
 \mathcal{L}_{\mathrm{loc}} \;=\; \sum_{t=1}^T \frac{1}{\sum_{u=1}^T w_{t,u} + \epsilon_{\mathrm{norm}}}\sum_{u=1}^T w_{t,u}\,\big(\mu_t - \mu_u\big)^2,
 \end{equation}
-where \(\epsilon_{\mathrm{norm}}>0\) is a small constant for stability in the normalization. Because \(w_{t,u}\) depends only on the underlying patch centers \(\{p_j\}\), tokens corresponding to the same patch (different layers) naturally receive maximal affinity; if a design choice requires discounting same-patch across-layer pairs one may set \(w_{t,u}=0\) when \(j(t)=j(u)\) — otherwise the above encourages tokens from the same patch to be placed nearby in the final order.
-
-Both \(\mathcal{L}_{\mathrm{ent}}\) and \(\mathcal{L}_{\mathrm{loc}}\) are weighted by small coefficients \(\alpha_{\mathrm{ent}},\alpha_{\mathrm{loc}}>0\) and incorporated into the overall training loss (see Sec.~\ref{sec:loss}).
-
-\paragraph{Remarks on shapes and stability.} All shapes and operations above are dimensionally consistent: \(E\in\mathbb{R}^{T\times d_a}\), \(W_{\uparrow}\in\mathbb{R}^{d_a\times T}\) producing \(\mathbf{G}\in\mathbb{R}^{T\times T}\), \(\exp(\cdot)\) is elementwise, Sinkhorn returns \(P\in\mathbb{R}^{T\times T}\), and \(P^\top X\) yields \(\mathbf{T}_{\mathrm{ord}}\in\mathbb{R}^{T\times D}\). The kNN graph is explicitly constructed over the unique patch centers \(\{p_j\}\) (shared across layers) and neighborhood aggregation pools neighbor tokens \emph{within the same Transformer layer} by design, which enforces geometric consistency while keeping layer semantics separated during descriptor computation. For numerical stability we recommend subtracting the per-column maximum prior to exponentiation (as shown), using \(\epsilon_{\mathrm{ent}}\) inside the entropy log, and using \(\epsilon_{\mathrm{norm}}\) in the locality normalization.
-
+where \(\tilde s=(s-1)/\max(1,T-1)\), \(\sigma_p\) is a bandwidth parameter, and \(\epsilon_{\mathrm{norm}}>0\) stabilizes the normalization. The locality penalty directly influences \(\mu_t\) and thus biases the soft-permutation \(P\) to place geometrically adjacent tokens into nearby slots.
 
 \subsubsection{Mamba Feature Adapter}
 
