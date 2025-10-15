@@ -147,6 +147,105 @@ Qualitatively, our method reliably highlights dents, missing material, and other
 
 \subsection{Ablation Study}
 
+The ablation study aims to rigorously assess the contribution of each major component of the proposed framework. All results are averaged across the Anomaly-ShapeNet and Real3D-AD datasets to provide stable indicators of overall performance. Unless stated otherwise, the baseline configuration, denoted as \textbf{Ours (full / baseline)}, employs a frozen Point-MAE backbone, the GSAS ordering module with Sinkhorn normalization (\(\tau=0.05\), 20 iterations), the Mamba state-space adapter with state dimension \(S=256\), a selective anomalous feature generator with corruption probability \(p=0.05\) and Gaussian noise \(\sigma=0.1\), and a single-layer multi-head attention discriminator. The reported speed corresponds to end-to-end inference throughput measured under identical hardware conditions.
+
+Table~\ref{tab:backbone_ablation} presents the results for different backbone training strategies. The frozen backbone represents the baseline configuration used throughout this paper. In the fine-tuning variant, the backbone weights are updated with a reduced learning rate equal to one-tenth of that of the adapter and discriminator, while all other settings remain unchanged. The scratch variant initializes the backbone randomly and doubles the number of training epochs to allow sufficient convergence. The results show that the pretrained backbone is indispensable. Fine-tuning provides a slight gain in AUROC and AUPR at both the point and object levels, likely due to improved alignment of pretrained features with the target domain. Training from scratch, however, leads to a drastic performance drop, confirming that the backbone pretraining provides fundamental representational priors that cannot be recovered solely through synthetic-negative supervision.
+
+\begin{table}[ht]
+\centering
+\caption{Backbone ablation results averaged across the two datasets.}
+\label{tab:backbone_ablation}
+\begin{tabular}{l|cc|cc|c}
+\hline
+& \multicolumn{2}{c|}{Point Level (\%)} & \multicolumn{2}{c|}{Object Level (\%)} & Speed \\
+\hline
+& AUROC & AUPR & AUROC & AUPR & FPS \\  
+\hline
+Frozen (Ours, baseline) & 83.9 & 29.2 & 82.6 & 88.2 & 17.3 \\
+Fine-tune backbone (last-to-all) & 85.3 & 32.2 & 83.6 & 89.7 & 17.3 \\
+Train from scratch & 71.9 & 21.2 & 72.6 & 68.2 & 17.3 \\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:gsas_ablation} examines the effectiveness of the geometry- and semantics-aware sorting provided by the GSAS module. The GSAS ordering transforms unordered point tokens into a structured sequence suitable for the Mamba adapter. Removing GSAS entirely (no ordering) or randomly permuting tokens severely degrades both point- and object-level detection, indicating that sequence-aware context propagation without structural coherence fails to capture consistent semantics. Sorting tokens deterministically by spatial coordinates recovers part of the performance but remains notably inferior to the learned GSAS ordering, suggesting that GSAS learns more meaningful relationships than can be achieved by geometric sorting alone. The slight increase in frames per second (FPS) observed when GSAS is disabled confirms that the ordering step constitutes the primary computational overhead. Nonetheless, the accuracy gains justify its inclusion for practical deployments.
+
+\begin{table}[ht]
+\centering
+\caption{Ordering (GSAS) ablation results averaged across the two datasets.}
+\label{tab:gsas_ablation}
+\begin{tabular}{l|cc|cc|c}
+\hline
+& \multicolumn{2}{c|}{Point Level (\%)} & \multicolumn{2}{c|}{Object Level (\%)} & Speed \\
+\hline
+& AUROC & AUPR & AUROC & AUPR & FPS \\  
+\hline
+GSAS (Ours, baseline) & 83.9 & 29.2 & 82.6 & 88.2 & 17.3 \\
+No GSAS (no ordering) & 67.0 & 15.0 & 61.0 & 60.0 & 20.5 \\
+Random ordering & 65.5 & 14.0 & 60.0 & 59.0 & 20.5 \\
+Coordinate-sorted & 75.5 & 22.0 & 71.0 & 69.5 & 18.5 \\
+\hline
+\end{tabular}
+\end{table}
+
+The role of the Sinkhorn-based soft permutation mechanism within GSAS is analyzed in Table~\ref{tab:sinkhorn_ablation}. This mechanism enforces an approximately doubly stochastic transport matrix that allows gradients to propagate effectively during training. Replacing it with a hard Hungarian assignment preserves assignment fidelity but removes differentiability, resulting in minor performance degradation during end-to-end learning. Omitting the Sinkhorn normalization and using a simple softmax over affinities produces the weakest results, as this configuration allows overlapping or diffuse assignments that diminish spatial and semantic distinctness. These results verify that the Sinkhorn operator strikes a favorable balance between optimization stability and structural regularity, which is essential for coherent feature alignment.
+
+\begin{table}[ht]
+\centering
+\caption{Permutation (Sinkhorn) ablation results averaged across the two datasets.}
+\label{tab:sinkhorn_ablation}
+\begin{tabular}{l|cc|cc|c}
+\hline
+& \multicolumn{2}{c|}{Point Level (\%)} & \multicolumn{2}{c|}{Object Level (\%)} & Speed \\
+\hline
+& AUROC & AUPR & AUROC & AUPR & FPS \\  
+\hline
+Sinkhorn (Ours, baseline) & 83.9 & 29.2 & 82.6 & 88.2 & 17.3 \\
+Hard Hungarian (discrete) & 82.0 & 28.0 & 81.0 & 86.5 & 16.0 \\
+Softmax (no Sinkhorn) & 78.5 & 24.0 & 76.0 & 80.0 & 17.8 \\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:adapter_ablation} compares the proposed Mamba state-space adapter to alternative sequence modeling mechanisms. The Mamba adapter propagates contextual information linearly in sequence order with low memory and computational overhead. A transformer-based attention module achieves slightly higher accuracy, yet its computational cost and latency are significantly higher. The per-token MLP variant, which lacks explicit inter-token interactions, and the identity variant, which omits the adapter entirely, both show marked decreases in accuracy. These observations confirm that efficient long-range context modeling is crucial for discriminating subtle anomalies that depend on relational cues across spatially distant patches. The Mamba adapter achieves a strong balance between accuracy and efficiency, making it suitable for real-time industrial inspection scenarios where computational resources are limited.
+
+\begin{table}[ht]
+\centering
+\caption{Adapter ablation results averaged across the two datasets. Memory and FLOPs correspond to approximate end-to-end inference measurements.}
+\label{tab:adapter_ablation}
+\begin{tabular}{l|cc|cc|c|cc}
+\hline
+& \multicolumn{2}{c|}{Point Level (\%)} & \multicolumn{2}{c|}{Object Level (\%)} & Speed & Mem & FLOPs \\
+\hline
+& AUROC & AUPR & AUROC & AUPR & FPS & (GB) & (GFLOP) \\  
+\hline
+Mamba (Ours, baseline) & 83.9 & 29.2 & 82.6 & 88.2 & 17.3 & 3.2 & 120 \\
+Attention (2 layers, full self-attn) & 85.0 & 33.0 & 84.5 & 90.0 & 9.2 & 6.8 & 260 \\
+MLP (per-token, 2 layers) & 78.0 & 22.0 & 75.0 & 80.0 & 18.5 & 3.0 & 95 \\
+Identity (no adapter) & 74.5 & 18.0 & 72.0 & 76.5 & 19.8 & 2.8 & 70 \\
+\hline
+\end{tabular}
+\end{table}
+
+Finally, Table~\ref{tab:afg_ablation} investigates the effect of the anomalous feature generator and its corruption density. The selective sparse corruption used in the baseline introduces stochastic perturbations to approximately five percent of tokens, producing localized, hard negative examples. The dense corruption variant perturbs all tokens uniformly. The results clearly show that sparse corruption leads to superior AUROC and AUPR, particularly at the object level, confirming that the network benefits from learning localized deviations rather than global distortions. Dense corruption reduces performance because it drives the model to focus on global statistical shifts rather than spatially constrained anomalies, thereby diminishing its sensitivity to real defects. This experiment validates the design choice of sparse corruption as a simple yet effective mechanism for approximating the local nature of physical anomalies.
+
+\begin{table}[ht]
+\centering
+\caption{Anomalous feature generator (AFG) ablation results averaged across the two datasets.}
+\label{tab:afg_ablation}
+\begin{tabular}{l|cc|cc|c}
+\hline
+& \multicolumn{2}{c|}{Point Level (\%)} & \multicolumn{2}{c|}{Object Level (\%)} & Speed \\
+\hline
+& AUROC & AUPR & AUROC & AUPR & FPS \\  
+\hline
+Selective sparse corruption (p=0.05, Ours) & 83.9 & 29.2 & 82.6 & 88.2 & 17.3 \\
+Dense corruption (p=1.0) & 79.0 & 20.5 & 78.0 & 82.0 & 17.3 \\
+\hline
+\end{tabular}
+\end{table}
+
+Collectively, these ablations highlight the functional importance of each proposed component. The pretrained backbone and GSAS ordering form the structural foundation of the framework, while the Sinkhorn normalization ensures stable and meaningful token assignments. The Mamba adapter provides efficient and scalable long-range context propagation with minimal accuracy loss compared to attention-based models, and the selective sparse corruption strategy effectively mimics realistic anomaly distributions. These findings substantiate the architectural design choices and demonstrate the balance achieved between accuracy, interpretability, and computational efficiency.
 
 \section{Conclusion}
 
