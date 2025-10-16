@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2023.5.31)  16 OCT 2025 10:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2023.5.31)  16 OCT 2025 18:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1735,18 +1735,16 @@ g>]
 LaTeX Font Warning: Font shape `U/lasy/m/n' in size <7.5> not available
 (Font)              size <7> substituted on input line 7.
 
+LaTeX Font Info:    Try loading font information for TS1+stix on input line 13.
 
+(/usr/share/texlive/texmf-dist/tex/latex/stix/ts1stix.fd
+File: ts1stix.fd 2015/04/17 v1.1.2-latex STIX TS1 font definitions
+)
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[2]
-LaTeX Font Info:    Try loading font information for TS1+stix on input line 13.
-
- (/usr/share/texlive/texmf-dist/tex/latex/stix/ts1stix.fd
-File: ts1stix.fd 2015/04/17 v1.1.2-latex STIX TS1 font definitions
-))
-(./RelatedWork.tex
+[2]) (./RelatedWork.tex
 LaTeX Font Info:    Font shape `T1/stix/bx/n' in size <11> not available
 (Font)              Font shape `T1/stix/b/n' tried instead on input line 4.
 
@@ -1765,36 +1763,28 @@ $[]$
  []
 
 [5]) (./Method.tex
-<figs/overview.png, id=185, 1800.7275pt x 829.0975pt>
-File: figs/overview.png Graphic file (type png)
-<use figs/overview.png>
-Package pdftex.def Info: figs/overview.png  used on input line 5.
-(pdftex.def)             Requested size: 458.96375pt x 211.30952pt.
+<figs/overview.jpg, id=187, 1327.49666pt x 595.09183pt>
+File: figs/overview.jpg Graphic file (type jpg)
+<use figs/overview.jpg>
+Package pdftex.def Info: figs/overview.jpg  used on input line 5.
+(pdftex.def)             Requested size: 458.96375pt x 205.74275pt.
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[6 <./figs/overview.png>]
-<figs/GSAS.png, id=204, 1523.6925pt x 717.68124pt>
-File: figs/GSAS.png Graphic file (type png)
-<use figs/GSAS.png>
-Package pdftex.def Info: figs/GSAS.png  used on input line 25.
-(pdftex.def)             Requested size: 458.96375pt x 216.17116pt.
+[6 <./figs/overview.jpg>]
+<figs/GSAS.jpg, id=203, 1129.68335pt x 514.76889pt>
+File: figs/GSAS.jpg Graphic file (type jpg)
+<use figs/GSAS.jpg>
+Package pdftex.def Info: figs/GSAS.jpg  used on input line 25.
+(pdftex.def)             Requested size: 458.96375pt x 209.14005pt.
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[7 <./figs/GSAS.png>]
-LaTeX Font Info:    Font shape `T1/stix/bx/n' in size <10> not available
-(Font)              Font shape `T1/stix/b/n' tried instead on input line 81.
-
-
-Package natbib Warning: Citation `gu2023mamba' on page 8 undefined on input lin
-e 81.
-
-
+[7 <./figs/GSAS.jpg>]
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
@@ -1805,7 +1795,7 @@ $[]$
  []
 
 [9]
-Underfull \hbox (badness 1281) in paragraph at lines 139--140
+Underfull \hbox (badness 1281) in paragraph at lines 143--144
 []\T1/stix/m/n/10 We jointly op-ti-mize the train-able com-po-nents (GSAS pa-ra
 m-e-ters, Mamba adapter pa-ram-e-ters, positional-
  []
@@ -1831,7 +1821,7 @@ $[]$
  []
 
 [13]
-<figs/shapenet.jpg, id=286, 1110.89314pt x 774.7344pt>
+<figs/shapenet.jpg, id=287, 1110.89314pt x 774.7344pt>
 File: figs/shapenet.jpg Graphic file (type jpg)
 <use figs/shapenet.jpg>
 Package pdftex.def Info: figs/shapenet.jpg  used on input line 55.
@@ -1847,7 +1837,7 @@ $[]$
  []
 
 [15 <./figs/shapenet.jpg>]
-<figs/real3d.jpg, id=327, 1361.5668pt x 923.8171pt>
+<figs/real3d.jpg, id=335, 1361.5668pt x 923.8171pt>
 File: figs/real3d.jpg Graphic file (type jpg)
 <use figs/real3d.jpg>
 Package pdftex.def Info: figs/real3d.jpg  used on input line 102.
@@ -1857,30 +1847,32 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[16 <./figs/real3d.jpg>]
+[16]
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[17]
+[17 <./figs/real3d.jpg>]
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[18]) (./main.bbl
+[18]
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[19]
+[19]) (./main.bbl
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[20])
+[20]
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
 
-Package natbib Warning: There were undefined citations.
-
+[21])
 
 Package caption Warning: Unused \captionsetup[subfloat] on input line 43.
 See the caption package documentation for explanation.
@@ -1891,7 +1883,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[21]
+[22]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 277.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 277.
@@ -1903,15 +1895,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 21544 strings out of 492982
- 366647 string characters out of 6134896
- 441127 words of memory out of 5000000
+ 21547 strings out of 492982
+ 366698 string characters out of 6134896
+ 443087 words of memory out of 5000000
  24693 multiletter control sequences out of 15000+600000
- 629084 words of font info for 151 fonts, out of 8000000 for 9000
+ 626355 words of font info for 150 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,10n,45p,10380b,571s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,10n,45p,10380b,643s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texliv
 e/texmf-dist/fonts/enc/dvips/stix/stix-t1.enc}{/usr/share/texlive/texmf-dist/fo
 nts/enc/dvips/stix/stix-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/publ
@@ -1929,10 +1924,10 @@ ex.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb><
 r/share/texlive/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/stix/stix-mathscr.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/stix/stix-mathsf.pfb>
-Output written on main.pdf (21 pages, 6715485 bytes).
+Output written on main.pdf (22 pages, 8193174 bytes).
 PDF statistics:
- 466 PDF objects out of 1000 (max. 8388607)
- 414 compressed objects within 5 object streams
- 143 named destinations out of 1000 (max. 500000)
+ 486 PDF objects out of 1000 (max. 8388607)
+ 429 compressed objects within 5 object streams
+ 146 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -80,23 +80,25 @@
 \citation{gu2020hippo}
 \citation{gu2021efficiently}
 \citation{gu2021combining,gu2022parameterization,smith2022simplified}
+\citation{gu2023mamba}
 \citation{vaswani2017attention}
 \citation{zhu2024vision,liu2024vmamba,guo2024mambair}
 \citation{zhu2024vision,liu2024vmamba,guo2024mambair}
 \citation{liang2024pointmamba,han2024mamba3d,zha2024lcm}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}State Space Model}{5}{subsection.2.3}}
-\citation{pang2022masked,chang2015shapenet}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{6}{section.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of the proposed 3D anomaly detection pipeline.\relax }}{6}{figure.caption.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of the proposed 3D anomaly detection framework. From left to right: input point cloud; hierarchical patch tokens produced by a frozen, pretrained point cloud Transformer; tokens reordered by the geometric semantic-aware sorter (GSAS) into a surface-aware, semantically coherent sequence; a selective state-space adapter (Mamba / S6) that fuses ordered tokens into context-enhanced slot features; a sparse Anomalous Feature Generator (training only) that injects feature-space perturbations to supervise a compact cross-patch attention discriminator; discriminator logits are reprojected to the point cloud to produce a per-point anomaly heatmap and a global point cloud score.\relax }}{6}{figure.caption.1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:overview}{{1}{6}{Overview of the proposed 3D anomaly detection pipeline.\relax }{figure.caption.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Backbone}{6}{subsection.3.1}}
+\newlabel{fig:overview}{{1}{6}{Overview of the proposed 3D anomaly detection framework. From left to right: input point cloud; hierarchical patch tokens produced by a frozen, pretrained point cloud Transformer; tokens reordered by the geometric semantic-aware sorter (GSAS) into a surface-aware, semantically coherent sequence; a selective state-space adapter (Mamba / S6) that fuses ordered tokens into context-enhanced slot features; a sparse Anomalous Feature Generator (training only) that injects feature-space perturbations to supervise a compact cross-patch attention discriminator; discriminator logits are reprojected to the point cloud to produce a per-point anomaly heatmap and a global point cloud score.\relax }{figure.caption.1}{}}
+\citation{pang2022masked,chang2015shapenet}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Backbone}{7}{subsection.3.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Geometric Semantic-Aware Sorter (GSAS)}{7}{subsection.3.2}}
 \newlabel{sec:gsas}{{3.2}{7}{Geometric Semantic-Aware Sorter (GSAS)}{subsection.3.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Overview of geometric semantic-aware sorter (GSAS).\relax }}{7}{figure.caption.2}}
 \newlabel{fig:GSAS}{{2}{7}{Overview of geometric semantic-aware sorter (GSAS).\relax }{figure.caption.2}{}}
 \citation{gu2023mamba}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Mamba Feature Adapter}{8}{subsubsection.3.2.1}}
+\citation{gu2023mamba}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Mamba Feature Adapter}{9}{subsubsection.3.2.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Anomalous Feature Generator}{9}{subsection.3.3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Cross-Patch Attention Discriminator}{10}{subsection.3.4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Loss Function and Training}{10}{subsection.3.5}}
@@ -111,12 +113,17 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Datasets}{12}{subsection.4.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Implementation Details}{12}{subsection.4.2}}
 \newlabel{sec:impl}{{4.2}{12}{Implementation Details}{subsection.4.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Evaluation Metrics}{13}{subsection.4.3}}
 \citation{bergmann2023anomaly}
 \citation{liu2023real3d}
 \citation{zhu2024towards}
 \citation{li2024towards}
+\citation{bergmann2023anomaly}
+\citation{liu2023real3d}
+\citation{zhu2024towards}
 \citation{li2024towards}
+\citation{bergmann2023anomaly}
+\citation{liu2023real3d}
+\citation{zhu2024towards}
 \citation{liu2023real3d}
 \citation{bergmann2023anomaly}
 \citation{zhu2024towards}
@@ -130,11 +137,16 @@
 \citation{rusu2009fast}
 \citation{roth2022towards}
 \citation{pang2022masked}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Average Result (\%) on Anomaly-ShapeNet dataset.\relax }}{14}{table.caption.4}}
-\newlabel{tab:ShapeNet}{{1}{14}{Average Result (\%) on Anomaly-ShapeNet dataset.\relax }{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Evaluation Metrics}{14}{subsection.4.3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Result on Anomaly-ShapeNet}{14}{subsection.4.4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Qualitative results on the newly collected Anomaly-ShapeNet \cite  {li2024towards}. From left to right: input point clouds and ground truth annotations of anomalous points in red, and anomaly scores for each 3D point predicted by the proposed method.\relax }}{15}{figure.caption.3}}
-\newlabel{fig:shapenet}{{3}{15}{Qualitative results on the newly collected Anomaly-ShapeNet \cite {li2024towards}. From left to right: input point clouds and ground truth annotations of anomalous points in red, and anomaly scores for each 3D point predicted by the proposed method.\relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Qualitative comparison on the Anomaly-ShapeNet dataset\nobreakspace  {}\cite  {li2024towards}. Columns (left$\rightarrow $right): input point cloud with ground-truth anomalous points overlaid in red; predicted per-point anomaly heatmaps generated by 3D-ST\nobreakspace  {}\cite  {bergmann2023anomaly}, Reg3D-AD\nobreakspace  {}\cite  {liu2023real3d}, Group3AD\nobreakspace  {}\cite  {zhu2024towards}, and our method. Predicted anomaly scores are visualized using a green$\rightarrow $red color map (green indicates low/normal regions, red indicates high/anomalous regions).\relax }}{15}{figure.caption.3}}
+\newlabel{fig:shapenet}{{3}{15}{Qualitative comparison on the Anomaly-ShapeNet dataset~\cite {li2024towards}. Columns (left$\rightarrow $right): input point cloud with ground-truth anomalous points overlaid in red; predicted per-point anomaly heatmaps generated by 3D-ST~\cite {bergmann2023anomaly}, Reg3D-AD~\cite {liu2023real3d}, Group3AD~\cite {zhu2024towards}, and our method. Predicted anomaly scores are visualized using a green$\rightarrow $red color map (green indicates low/normal regions, red indicates high/anomalous regions).\relax }{figure.caption.3}{}}
+\citation{bergmann2023anomaly}
+\citation{liu2023real3d}
+\citation{zhu2024towards}
+\citation{bergmann2023anomaly}
+\citation{liu2023real3d}
+\citation{zhu2024towards}
 \citation{bergmann2023anomaly}
 \citation{liu2023real3d}
 \citation{zhu2024towards}
@@ -143,26 +155,28 @@
 \citation{zhu2024towards}
 \citation{li2024towards}
 \citation{zhou2024r3d}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Quantitative results (\%) on the Anomaly-ShapeNet benchmark. We report point-level and object-level detection metrics: AUROC and AUPR (higher is better) for per-point localization and per-object anomaly detection, respectively. ``Speed'' denotes inference throughput in frames-per-second (FPS).\relax }}{16}{table.caption.4}}
+\newlabel{tab:ShapeNet}{{1}{16}{Quantitative results (\%) on the Anomaly-ShapeNet benchmark. We report point-level and object-level detection metrics: AUROC and AUPR (higher is better) for per-point localization and per-object anomaly detection, respectively. ``Speed'' denotes inference throughput in frames-per-second (FPS).\relax }{table.caption.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Quantitative results (\%) on the Real3D-AD benchmark. We report point-level and object-level detection metrics: AUROC and AUPR (higher is better) for per-point localization and per-object anomaly detection, respectively. ``Speed'' denotes inference throughput in frames-per-second (FPS).\relax }}{16}{table.caption.6}}
+\newlabel{tab:Real3D}{{2}{16}{Quantitative results (\%) on the Real3D-AD benchmark. We report point-level and object-level detection metrics: AUROC and AUPR (higher is better) for per-point localization and per-object anomaly detection, respectively. ``Speed'' denotes inference throughput in frames-per-second (FPS).\relax }{table.caption.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Result on Real3D-AD}{16}{subsection.4.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Qualitative results on Real3D-AD dataset. From left to right: input point clouds, Ground truth annotations of anomalous points in red, and anomaly scores for each 3D point predicted by the proposed method.\relax }}{16}{figure.caption.5}}
-\newlabel{fig:real3d}{{4}{16}{Qualitative results on Real3D-AD dataset. From left to right: input point clouds, Ground truth annotations of anomalous points in red, and anomaly scores for each 3D point predicted by the proposed method.\relax }{figure.caption.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Average Results (\%) on Real3D-AD dataset.\relax }}{17}{table.caption.6}}
-\newlabel{tab:Real3D}{{2}{17}{Average Results (\%) on Real3D-AD dataset.\relax }{table.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Qualitative comparison on the Real3D-AD dataset. Columns (left$\rightarrow $right): input point cloud with ground-truth anomalous points overlaid in red; predicted per-point anomaly heatmaps generated by 3D-ST\nobreakspace  {}\cite  {bergmann2023anomaly}, Reg3D-AD\nobreakspace  {}\cite  {liu2023real3d}, Group3AD\nobreakspace  {}\cite  {zhu2024towards}, and our method. Predicted anomaly scores are visualized using a green$\rightarrow $red color map (green indicates low/normal regions, red indicates high/anomalous regions).\relax }}{17}{figure.caption.5}}
+\newlabel{fig:real3d}{{4}{17}{Qualitative comparison on the Real3D-AD dataset. Columns (left$\rightarrow $right): input point cloud with ground-truth anomalous points overlaid in red; predicted per-point anomaly heatmaps generated by 3D-ST~\cite {bergmann2023anomaly}, Reg3D-AD~\cite {liu2023real3d}, Group3AD~\cite {zhu2024towards}, and our method. Predicted anomaly scores are visualized using a green$\rightarrow $red color map (green indicates low/normal regions, red indicates high/anomalous regions).\relax }{figure.caption.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Ablation Study}{17}{subsection.4.6}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Backbone ablation results averaged across the two datasets.\relax }}{18}{table.caption.7}}
 \newlabel{tab:backbone_ablation}{{3}{18}{Backbone ablation results averaged across the two datasets.\relax }{table.caption.7}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Ordering (GSAS) ablation results averaged across the two datasets.\relax }}{18}{table.caption.8}}
 \newlabel{tab:gsas_ablation}{{4}{18}{Ordering (GSAS) ablation results averaged across the two datasets.\relax }{table.caption.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Permutation (Sinkhorn) ablation results averaged across the two datasets.\relax }}{18}{table.caption.9}}
-\newlabel{tab:sinkhorn_ablation}{{5}{18}{Permutation (Sinkhorn) ablation results averaged across the two datasets.\relax }{table.caption.9}{}}
-\bibstyle{elsarticle-num}
-\bibdata{cas-refs}
-\bibcite{samrouth2025dual}{{1}{}{{}}{{}}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Permutation (Sinkhorn) ablation results averaged across the two datasets.\relax }}{19}{table.caption.9}}
+\newlabel{tab:sinkhorn_ablation}{{5}{19}{Permutation (Sinkhorn) ablation results averaged across the two datasets.\relax }{table.caption.9}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Adapter ablation results averaged across the two datasets. Memory and FLOPs correspond to approximate end-to-end inference measurements.\relax }}{19}{table.caption.10}}
 \newlabel{tab:adapter_ablation}{{6}{19}{Adapter ablation results averaged across the two datasets. Memory and FLOPs correspond to approximate end-to-end inference measurements.\relax }{table.caption.10}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Anomalous feature generator (AFG) ablation results averaged across the two datasets.\relax }}{19}{table.caption.11}}
 \newlabel{tab:afg_ablation}{{7}{19}{Anomalous feature generator (AFG) ablation results averaged across the two datasets.\relax }{table.caption.11}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{19}{section.5}}
+\bibstyle{elsarticle-num}
+\bibdata{cas-refs}
+\bibcite{samrouth2025dual}{{1}{}{{}}{{}}}
 \bibcite{casas2024comparative}{{2}{}{{}}{{}}}
 \bibcite{liu2025improved}{{3}{}{{}}{{}}}
 \bibcite{venkataramanan2020attention}{{4}{}{{}}{{}}}
@@ -208,15 +222,16 @@
 \bibcite{gu2021combining}{{44}{}{{}}{{}}}
 \bibcite{gu2022parameterization}{{45}{}{{}}{{}}}
 \bibcite{smith2022simplified}{{46}{}{{}}{{}}}
-\bibcite{vaswani2017attention}{{47}{}{{}}{{}}}
-\bibcite{zhu2024vision}{{48}{}{{}}{{}}}
-\bibcite{liu2024vmamba}{{49}{}{{}}{{}}}
-\bibcite{guo2024mambair}{{50}{}{{}}{{}}}
-\bibcite{han2024mamba3d}{{51}{}{{}}{{}}}
-\bibcite{zha2024lcm}{{52}{}{{}}{{}}}
-\bibcite{pang2022masked}{{53}{}{{}}{{}}}
-\bibcite{chang2015shapenet}{{54}{}{{}}{{}}}
-\bibcite{rusu2009fast}{{55}{}{{}}{{}}}
-\bibcite{yu2022point}{{56}{}{{}}{{}}}
-\csxdef{lastpage}{21}
+\bibcite{gu2023mamba}{{47}{}{{}}{{}}}
+\bibcite{vaswani2017attention}{{48}{}{{}}{{}}}
+\bibcite{zhu2024vision}{{49}{}{{}}{{}}}
+\bibcite{liu2024vmamba}{{50}{}{{}}{{}}}
+\bibcite{guo2024mambair}{{51}{}{{}}{{}}}
+\bibcite{han2024mamba3d}{{52}{}{{}}{{}}}
+\bibcite{zha2024lcm}{{53}{}{{}}{{}}}
+\bibcite{pang2022masked}{{54}{}{{}}{{}}}
+\bibcite{chang2015shapenet}{{55}{}{{}}{{}}}
+\bibcite{rusu2009fast}{{56}{}{{}}{{}}}
+\bibcite{yu2022point}{{57}{}{{}}{{}}}
+\csxdef{lastpage}{22}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers

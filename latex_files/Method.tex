@@ -3,7 +3,7 @@
 \begin{figure}[h!]
   \centering 
     \includegraphics[width=0.98\linewidth]{figs/overview}
-  \caption{Overview of the proposed 3D anomaly detection pipeline.}
+  \caption{Overview of the proposed 3D anomaly detection framework. From left to right: input point cloud; hierarchical patch tokens produced by a frozen, pretrained point cloud Transformer; tokens reordered by the geometric semantic-aware sorter (GSAS) into a surface-aware, semantically coherent sequence; a selective state-space adapter (Mamba / S6) that fuses ordered tokens into context-enhanced slot features; a sparse Anomalous Feature Generator (training only) that injects feature-space perturbations to supervise a compact cross-patch attention discriminator; discriminator logits are reprojected to the point cloud to produce a per-point anomaly heatmap and a global point cloud score.}
   \label{fig:overview}
 \end{figure}
 
@@ -74,23 +74,27 @@ where \(\tilde s=(s-1)/\max(1,T-1)\), \(\sigma_p\) is a bandwidth parameter, and
 
 \subsubsection{Mamba Feature Adapter}
 
-Given ordered input tokens \(\mathbf{T}_{\mathrm{ord}}\in\mathbb{R}^{T\times D}\), we denote the row-wise sequence by
+Given the GSAS-ordered slot tokens \(\mathbf{T}_{\mathrm{ord}}\in\mathbb{R}^{T\times D}\) we denote the row-wise sequence by
 \begin{equation}
 x_{1:T},\qquad x_t=\mathbf{T}_{\mathrm{ord}}[t,:]\in\mathbb{R}^D,\quad t=1,\dots,T.
 \end{equation}
-The sequence \(x_{1:T}\) encodes the GSAS-induced order and serves as the input that the Mamba recurrence \cite{gu2023mamba} integrates to produce context-enhanced outputs for each slot. The Mamba adapter is a state-space model with latent dimension \(S\). The recurrence for the hidden state is
+We integrate this sequence with a selective state-space adapter from the S6/Mamba family \cite{gu2023mamba}. The adapter conditions its discrete dynamics on the current token, allowing per-token adjustment of the effective temporal scale and input coupling while preserving linear-time complexity. The selective discrete recurrence may be written compactly as
 \begin{equation}
-h_t = A\,h_{t-1} + B\,x_t,\qquad h_0=\mathbf{0}\in\mathbb{R}^S,
+h_t = A_t\,h_{t-1} + B_t\,x_t,\qquad h_0=\mathbf{0}\in\mathbb{R}^S,
 \end{equation}
-where \(A\in\mathbb{R}^{S\times S}\) and \(B\in\mathbb{R}^{S\times D}\). The recurrence accumulates long-range, layer-wise context along the GSAS ordering, and the resulting hidden state \(h_t\) provides the global contextual information used by the output projection in the next equation. The Mamba output equation combines the recurrent state with a residual connection from the input:
+where \(h_t\in\mathbb{R}^S\) is the SSM hidden state at step \(t\) and \((A_t,B_t)\) are token-conditioned discrete matrices obtained from continuous-time proposals via the S6 discretization \cite{gu2023mamba}. The S6 output projection produces an adapted slot feature by combining the recurrent state with a residual path from the input:
 \begin{equation}
-\tilde{q}_t = C\,h_t + D\,x_t \in\mathbb{R}^D,
+\tilde{q}_t = C_t\,h_t + D\,x_t \in\mathbb{R}^D,
 \end{equation}
-with \(C\in\mathbb{R}^{D\times S}\) and \(D\in\mathbb{R}^{D\times D}\). The term \(D\,x_t\) preserves per-token fidelity while the term \(C\,h_t\) injects long-range context into the adapted output \(\tilde{q}_t\); this adapted output is the quantity consumed by downstream modules for anomaly scoring. The adapter parameters are shared across time steps and collected as \(\{A,B,C,D\}\). The parameter sharing ensures parameter efficiency and linear-time complexity; specifically, the module operates in \(\mathcal{O}(T)\) time and requires \(\mathcal{O}(S)\) additional memory per step, which contrasts with the \(\mathcal{O}(T^2)\) cost of full self-attention. The linear complexity permits practical fusion of the flattened \(T=L\cdot M\) tokens produced by the backbone and GSAS. The sequence of adapted outputs is assembled as
+where \(C_t\) is token-conditioned and \(D\in\mathbb{R}^{D\times D}\) is a learned residual projection that preserves per-token fidelity. To stabilize training and allow the model to adaptively gate the SSM contribution we apply a lightweight gating and normalization:
 \begin{equation}
-Q=[\tilde{q}_1,\dots,\tilde{q}_T]^\top\in\mathbb{R}^{T\times D},
+q_t = \mathrm{LayerNorm}\!\Big( x_t + \sigma\big(g(x_t)\big)\odot \tilde{q}_t \Big),
 \end{equation}
-and we set \(q_t\equiv\tilde{q}_t\) for consistency with subsequent notation. The matrix \(Q\) provides the context-enriched features for each ordered slot and thus forms the direct input to the cross-patch discriminator and remaining heads.
+where \(g:\mathbb{R}^D\!\to\!\mathbb{R}^D\) is a small projection, \(\sigma\) is the sigmoid, and \(\odot\) denotes elementwise multiplication. Finally, the context-enriched token sequence is assembled as
+\begin{equation}
+Q = [q_1,\dots,q_T]^\top \in \mathbb{R}^{T\times D},
+\end{equation}
+which is passed to the downstream discriminator and heads for anomaly scoring. 
 
 \subsection{Anomalous Feature Generator}
 

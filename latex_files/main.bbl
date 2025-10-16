@@ -245,6 +245,10 @@ A.~Gu, K.~Goel, A.~Gupta, C.~R{\'e}, On the parameterization and initialization
 J.~T. Smith, A.~Warrington, S.~W. Linderman, Simplified state space layers for
   sequence modeling, arXiv preprint arXiv:2208.04933 (2022).
 
+\bibitem{gu2023mamba}
+A.~Gu, T.~Dao, Mamba: Linear-time sequence modeling with selective state
+  spaces, arXiv preprint arXiv:2312.00752 (2023).
+
 \bibitem{vaswani2017attention}
 A.~Vaswani, N.~Shazeer, N.~Parmar, J.~Uszkoreit, L.~Jones, A.~N. Gomez,
   {\L}.~Kaiser, I.~Polosukhin, Attention is all you need, Advances in neural
