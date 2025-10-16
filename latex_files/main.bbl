@@ -5,6 +5,19 @@
 \expandafter\ifx\csname href\endcsname\relax
   \def\href#1#2{#2} \def\path#1{#1}\fi
 
+\bibitem{samrouth2025dual}
+K.~Samrouth, S.~Nazir, N.~Bakir, N.~Khodor, Dual cnn for photovoltaic
+  electroluminescence images microcrack detection, Array (2025) 100442.
+
+\bibitem{casas2024comparative}
+E.~Casas, L.~Ramos, C.~Romero, F.~Rivas-Echeverria, A comparative study of
+  yolov5 and yolov8 for corrosion segmentation tasks in metal surfaces, Array
+  22 (2024) 100351.
+
+\bibitem{liu2025improved}
+R.~Liu, Z.~He, J.~Zhang, P.~Chen, W.~Quan, S.~Liu, Y.~Liu, An improved u-net
+  based method for predicting cable tunnel cracks, Array (2025) 100421.
+
 \bibitem{venkataramanan2020attention}
 S.~Venkataramanan, K.-C. Peng, R.~V. Singh, A.~Mahalanobis, Attention guided
   anomaly localization in images, in: European Conference on Computer Vision,
@@ -14,18 +27,6 @@ S.~Venkataramanan, K.-C. Peng, R.~V. Singh, A.~Mahalanobis, Attention guided
 C.~Ding, G.~Pang, C.~Shen, Catching both gray and black swans: Open-set
   supervised anomaly detection, in: Proceedings of the IEEE/CVF conference on
   computer vision and pattern recognition, 2022, pp. 7388--7398.
-
-\bibitem{chadha2019comparison}
-G.~S. Chadha, A.~Rabbani, A.~Schwung, Comparison of semi-supervised deep neural
-  networks for anomaly detection in industrial processes, in: 2019 IEEE 17th
-  international conference on industrial informatics (INDIN), Vol.~1, IEEE,
-  2019, pp. 214--219.
-
-\bibitem{chu2020neural}
-W.-H. Chu, K.~M. Kitani, Neural batch sampling with reinforcement learning for
-  semi-supervised anomaly detection, in: Computer Vision--ECCV 2020: 16th
-  European Conference, Glasgow, UK, August 23--28, 2020, Proceedings, Part XXVI
-  16, Springer, 2020, pp. 751--766.
 
 \bibitem{shi2021dfr}
 Y.~Shi, J.~Yang, Z.~Qi, {DFR}: Deep feature reconstruction for unsupervised
@@ -59,81 +60,16 @@ X.~Yao, R.~Li, Z.~Qian, Y.~Luo, C.~Zhang, Focus the discrepancy: Intra-and
   the IEEE/CVF International Conference on Computer Vision, 2023, pp.
   6803--6813.
 
-\bibitem{luo2024ami}
-W.~Luo, H.~Yao, W.~Yu, Z.~Li, {AMI-Net}: Adaptive mask inpainting network for
-  industrial anomaly detection and localization, IEEE Transactions on
-  Automation Science and Engineering (2024).
-
-\bibitem{zhang2023unsupervised}
-X.~Zhang, N.~Li, J.~Li, T.~Dai, Y.~Jiang, S.-T. Xia, Unsupervised surface
-  anomaly detection with diffusion probabilistic model, in: Proceedings of the
-  IEEE/CVF International Conference on Computer Vision, 2023, pp. 6782--6791.
-
-\bibitem{lu2023removing}
-F.~Lu, X.~Yao, C.-W. Fu, J.~Jia, Removing anomalies as noises for industrial
-  defect localization, in: Proceedings of the IEEE/CVF International Conference
-  on Computer Vision, 2023, pp. 16166--16175.
-
-\bibitem{tebbe2024dynamic}
-J.~Tebbe, J.~Tayyub, Dynamic addition of noise in a diffusion model for anomaly
-  detection, in: Proceedings of the IEEE/CVF Conference on Computer Vision and
-  Pattern Recognition, 2024, pp. 3940--3949.
+\bibitem{defard2021padim}
+T.~Defard, A.~Setkov, A.~Loesch, R.~Audigier, {PaDiM}: a patch distribution
+  modeling framework for anomaly detection and localization, in: International
+  conference on pattern recognition, Springer, 2021, pp. 475--489.
 
 \bibitem{bergmann2020uninformed}
 P.~Bergmann, M.~Fauser, D.~Sattlegger, C.~Steger, Uninformed students:
   Student-teacher anomaly detection with discriminative latent embeddings, in:
   Proceedings of the IEEE/CVF conference on computer vision and pattern
   recognition, 2020, pp. 4183--4192.
-
-\bibitem{salehi2021multiresolution}
-M.~Salehi, N.~Sadjadi, S.~Baselizadeh, M.~H. Rohban, H.~R. Rabiee,
-  Multiresolution knowledge distillation for anomaly detection, in: Proceedings
-  of the IEEE/CVF conference on computer vision and pattern recognition, 2021,
-  pp. 14902--14912.
-
-\bibitem{wan2022unsupervised}
-Q.~Wan, L.~Gao, X.~Li, L.~Wen, Unsupervised image anomaly detection and
-  segmentation based on pretrained feature mapping, IEEE Transactions on
-  Industrial Informatics 19~(3) (2022) 2330--2339.
-
-\bibitem{gu2023remembering}
-Z.~Gu, L.~Liu, X.~Chen, R.~Yi, J.~Zhang, Y.~Wang, C.~Wang, A.~Shu, G.~Jiang,
-  L.~Ma, Remembering normality: Memory-guided knowledge distillation for
-  unsupervised anomaly detection, in: Proceedings of the IEEE/CVF International
-  Conference on Computer Vision, 2023, pp. 16401--16409.
-
-\bibitem{tong2024enhanced}
-G.~Tong, Q.~Li, Y.~Song, Enhanced multi-scale features mutual mapping fusion
-  based on reverse knowledge distillation for industrial anomaly detection and
-  localization, IEEE Transactions on Big Data 10~(4) (2024) 498--513.
-
-\bibitem{defard2021padim}
-T.~Defard, A.~Setkov, A.~Loesch, R.~Audigier, {PaDiM}: a patch distribution
-  modeling framework for anomaly detection and localization, in: International
-  conference on pattern recognition, Springer, 2021, pp. 475--489.
-
-\bibitem{roth2022towards}
-K.~Roth, L.~Pemula, J.~Zepeda, B.~Sch{\"o}lkopf, T.~Brox, P.~Gehler, Towards
-  total recall in industrial anomaly detection, in: Proceedings of the IEEE/CVF
-  conference on computer vision and pattern recognition, 2022, pp.
-  14318--14328.
-
-\bibitem{bae2023pni}
-J.~Bae, J.-H. Lee, S.~Kim, {PNI}: Industrial anomaly detection using position
-  and neighborhood information, in: Proceedings of the IEEE/CVF International
-  Conference on Computer Vision, 2023, pp. 6373--6383.
-
-\bibitem{zuo2024reconstruction}
-Z.~Zuo, Z.~Wu, B.~Chen, X.~Zhong, A reconstruction-based feature adaptation for
-  anomaly detection with self-supervised multi-scale aggregation, in: ICASSP
-  2024-2024 IEEE International Conference on Acoustics, Speech and Signal
-  Processing (ICASSP), IEEE, 2024, pp. 5840--5844.
-
-\bibitem{hyun2024reconpatch}
-J.~Hyun, S.~Kim, G.~Jeon, S.~H. Kim, K.~Bae, B.~J. Kang, {ReConPatch}:
-  Contrastive patch representation learning for industrial anomaly detection,
-  in: Proceedings of the IEEE/CVF Winter Conference on Applications of Computer
-  Vision, 2024, pp. 2052--2061.
 
 \bibitem{li2021cutpaste}
 C.-L. Li, K.~Sohn, J.~Yoon, T.~Pfister, {CutPaste}: Self-supervised learning
@@ -145,23 +81,6 @@ Z.~Liu, Y.~Zhou, Y.~Xu, Z.~Wang, {SimpleNet}: A simple network for image
   anomaly detection and localization, in: Proceedings of the IEEE/CVF
   conference on computer vision and pattern recognition, 2023, pp.
   20402--20411.
-
-\bibitem{fang2023fastrecon}
-Z.~Fang, X.~Wang, H.~Li, J.~Liu, Q.~Hu, J.~Xiao, {FastRecon}: Few-shot
-  industrial anomaly detection via fast feature reconstruction, in: Proceedings
-  of the IEEE/CVF International Conference on Computer Vision, 2023, pp.
-  17481--17490.
-
-\bibitem{zhang2024realnet}
-X.~Zhang, M.~Xu, X.~Zhou, {RealNet}: A feature selection network with realistic
-  synthetic anomaly for anomaly detection, in: Proceedings of the IEEE/CVF
-  conference on computer vision and pattern recognition, 2024, pp.
-  16699--16708.
-
-\bibitem{horwitz2023back}
-E.~Horwitz, Y.~Hoshen, Back to the feature: classical 3d features are (almost)
-  all you need for 3d anomaly detection, in: Proceedings of the IEEE/CVF
-  Conference on Computer Vision and Pattern Recognition, 2023, pp. 2968--2977.
 
 \bibitem{cao2024complementary}
 Y.~Cao, X.~Xu, W.~Shen, Complementary pseudo multimodal feature for point cloud
@@ -204,14 +123,113 @@ Z.~Zhou, L.~Wang, N.~Fang, Z.~Wang, L.~Qiu, S.~Zhang, {R3D-AD}: Reconstruction
   via diffusion for 3d anomaly detection, in: European Conference on Computer
   Vision, Springer, 2024, pp. 91--107.
 
+\bibitem{liang2024pointmamba}
+D.~Liang, X.~Zhou, W.~Xu, X.~Zhu, Z.~Zou, X.~Ye, X.~Tan, X.~Bai, Pointmamba: A
+  simple state space model for point cloud analysis, Advances in neural
+  information processing systems 37 (2024) 32653--32677.
+
+\bibitem{gu2021efficiently}
+A.~Gu, K.~Goel, C.~R{\'e}, Efficiently modeling long sequences with structured
+  state spaces, arXiv preprint arXiv:2111.00396 (2021).
+
 \bibitem{gu2020hippo}
 A.~Gu, T.~Dao, S.~Ermon, A.~Rudra, C.~R{\'e}, Hippo: Recurrent memory with
   optimal polynomial projections, Advances in neural information processing
   systems 33 (2020) 1474--1487.
 
-\bibitem{gu2021efficiently}
-A.~Gu, K.~Goel, C.~R{\'e}, Efficiently modeling long sequences with structured
-  state spaces, arXiv preprint arXiv:2111.00396 (2021).
+\bibitem{chadha2019comparison}
+G.~S. Chadha, A.~Rabbani, A.~Schwung, Comparison of semi-supervised deep neural
+  networks for anomaly detection in industrial processes, in: 2019 IEEE 17th
+  international conference on industrial informatics (INDIN), Vol.~1, IEEE,
+  2019, pp. 214--219.
+
+\bibitem{chu2020neural}
+W.-H. Chu, K.~M. Kitani, Neural batch sampling with reinforcement learning for
+  semi-supervised anomaly detection, in: Computer Vision--ECCV 2020: 16th
+  European Conference, Glasgow, UK, August 23--28, 2020, Proceedings, Part XXVI
+  16, Springer, 2020, pp. 751--766.
+
+\bibitem{luo2024ami}
+W.~Luo, H.~Yao, W.~Yu, Z.~Li, {AMI-Net}: Adaptive mask inpainting network for
+  industrial anomaly detection and localization, IEEE Transactions on
+  Automation Science and Engineering (2024).
+
+\bibitem{zhang2023unsupervised}
+X.~Zhang, N.~Li, J.~Li, T.~Dai, Y.~Jiang, S.-T. Xia, Unsupervised surface
+  anomaly detection with diffusion probabilistic model, in: Proceedings of the
+  IEEE/CVF International Conference on Computer Vision, 2023, pp. 6782--6791.
+
+\bibitem{lu2023removing}
+F.~Lu, X.~Yao, C.-W. Fu, J.~Jia, Removing anomalies as noises for industrial
+  defect localization, in: Proceedings of the IEEE/CVF International Conference
+  on Computer Vision, 2023, pp. 16166--16175.
+
+\bibitem{tebbe2024dynamic}
+J.~Tebbe, J.~Tayyub, Dynamic addition of noise in a diffusion model for anomaly
+  detection, in: Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition, 2024, pp. 3940--3949.
+
+\bibitem{salehi2021multiresolution}
+M.~Salehi, N.~Sadjadi, S.~Baselizadeh, M.~H. Rohban, H.~R. Rabiee,
+  Multiresolution knowledge distillation for anomaly detection, in: Proceedings
+  of the IEEE/CVF conference on computer vision and pattern recognition, 2021,
+  pp. 14902--14912.
+
+\bibitem{wan2022unsupervised}
+Q.~Wan, L.~Gao, X.~Li, L.~Wen, Unsupervised image anomaly detection and
+  segmentation based on pretrained feature mapping, IEEE Transactions on
+  Industrial Informatics 19~(3) (2022) 2330--2339.
+
+\bibitem{gu2023remembering}
+Z.~Gu, L.~Liu, X.~Chen, R.~Yi, J.~Zhang, Y.~Wang, C.~Wang, A.~Shu, G.~Jiang,
+  L.~Ma, Remembering normality: Memory-guided knowledge distillation for
+  unsupervised anomaly detection, in: Proceedings of the IEEE/CVF International
+  Conference on Computer Vision, 2023, pp. 16401--16409.
+
+\bibitem{tong2024enhanced}
+G.~Tong, Q.~Li, Y.~Song, Enhanced multi-scale features mutual mapping fusion
+  based on reverse knowledge distillation for industrial anomaly detection and
+  localization, IEEE Transactions on Big Data 10~(4) (2024) 498--513.
+
+\bibitem{roth2022towards}
+K.~Roth, L.~Pemula, J.~Zepeda, B.~Sch{\"o}lkopf, T.~Brox, P.~Gehler, Towards
+  total recall in industrial anomaly detection, in: Proceedings of the IEEE/CVF
+  conference on computer vision and pattern recognition, 2022, pp.
+  14318--14328.
+
+\bibitem{bae2023pni}
+J.~Bae, J.-H. Lee, S.~Kim, {PNI}: Industrial anomaly detection using position
+  and neighborhood information, in: Proceedings of the IEEE/CVF International
+  Conference on Computer Vision, 2023, pp. 6373--6383.
+
+\bibitem{zuo2024reconstruction}
+Z.~Zuo, Z.~Wu, B.~Chen, X.~Zhong, A reconstruction-based feature adaptation for
+  anomaly detection with self-supervised multi-scale aggregation, in: ICASSP
+  2024-2024 IEEE International Conference on Acoustics, Speech and Signal
+  Processing (ICASSP), IEEE, 2024, pp. 5840--5844.
+
+\bibitem{hyun2024reconpatch}
+J.~Hyun, S.~Kim, G.~Jeon, S.~H. Kim, K.~Bae, B.~J. Kang, {ReConPatch}:
+  Contrastive patch representation learning for industrial anomaly detection,
+  in: Proceedings of the IEEE/CVF Winter Conference on Applications of Computer
+  Vision, 2024, pp. 2052--2061.
+
+\bibitem{fang2023fastrecon}
+Z.~Fang, X.~Wang, H.~Li, J.~Liu, Q.~Hu, J.~Xiao, {FastRecon}: Few-shot
+  industrial anomaly detection via fast feature reconstruction, in: Proceedings
+  of the IEEE/CVF International Conference on Computer Vision, 2023, pp.
+  17481--17490.
+
+\bibitem{zhang2024realnet}
+X.~Zhang, M.~Xu, X.~Zhou, {RealNet}: A feature selection network with realistic
+  synthetic anomaly for anomaly detection, in: Proceedings of the IEEE/CVF
+  conference on computer vision and pattern recognition, 2024, pp.
+  16699--16708.
+
+\bibitem{horwitz2023back}
+E.~Horwitz, Y.~Hoshen, Back to the feature: classical 3d features are (almost)
+  all you need for 3d anomaly detection, in: Proceedings of the IEEE/CVF
+  Conference on Computer Vision and Pattern Recognition, 2023, pp. 2968--2977.
 
 \bibitem{gu2021combining}
 A.~Gu, I.~Johnson, K.~Goel, K.~Saab, T.~Dao, A.~Rudra, C.~R{\'e}, Combining
@@ -247,11 +265,6 @@ Y.~Liu, Y.~Tian, Y.~Zhao, H.~Yu, L.~Xie, Y.~Wang, Q.~Ye, J.~Jiao, Y.~Liu,
 H.~Guo, J.~Li, T.~Dai, Z.~Ouyang, X.~Ren, S.-T. Xia, Mambair: A simple baseline
   for image restoration with state-space model, in: European conference on
   computer vision, Springer, 2024, pp. 222--241.
-
-\bibitem{liang2024pointmamba}
-D.~Liang, X.~Zhou, W.~Xu, X.~Zhu, Z.~Zou, X.~Ye, X.~Tan, X.~Bai, Pointmamba: A
-  simple state space model for point cloud analysis, Advances in neural
-  information processing systems 37 (2024) 32653--32677.
 
 \bibitem{han2024mamba3d}
 X.~Han, Y.~Tang, Z.~Wang, X.~Li, Mamba3d: Enhancing local features for 3d point

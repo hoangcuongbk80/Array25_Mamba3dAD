@@ -33,7 +33,7 @@ We construct a kNN graph on the unique patch centers and denotes the neighbor se
 \begin{equation}
 u_{i,j} \;=\; \mathrm{MaxPool}\Big(\big\{\,W_{\downarrow}\,t_{i,u} + b_{\downarrow} \ \big|\ u\in\mathcal{N}_{\mathrm{patch}}(j)\big\}\Big)\in\mathbb{R}^{d_a},
 \end{equation}
-where \(W_{\downarrow}\in\mathbb{R}^{d_a\times D}\) and \(b_{\downarrow}\in\mathbb{R}^{d_a}\). The module collects these descriptors into \(E\in\mathbb{R}^{T\times d_a}\) by setting \(E_{t,:}=u_{i(t),j(t)}\). The descriptor \(E\) summarizes local geometry while preserving layer-specific semantics, and GSAS uses \(E\) to inform the affinity computation in the next step. We computes raw token-slot affinities from the descriptors:
+where \(W_{\downarrow}\in\mathbb{R}^{d_a\times D}\) and \(b_{\downarrow}\in\mathbb{R}^{d_a}\). The module collects these descriptors into \(E\in\mathbb{R}^{T\times d_a}\) by setting \(E_{t,:}=u_{i(t),j(t)}\). The descriptor \(E\) summarizes local geometry while preserving layer-specific semantics, and GSAS uses \(E\) to inform the affinity computation in the next step. We compute raw token-slot affinities from the descriptors:
 \begin{equation}
 \mathbf{G} \;=\; E\,W_{\uparrow} + \mathbf{1}\,b_{\uparrow}^\top \in\mathbb{R}^{T\times T},
 \end{equation}
@@ -78,7 +78,7 @@ Given ordered input tokens \(\mathbf{T}_{\mathrm{ord}}\in\mathbb{R}^{T\times D}\
 \begin{equation}
 x_{1:T},\qquad x_t=\mathbf{T}_{\mathrm{ord}}[t,:]\in\mathbb{R}^D,\quad t=1,\dots,T.
 \end{equation}
-The sequence \(x_{1:T}\) encodes the GSAS-induced order and serves as the input that the Mamba recurrence integrates to produce context-enhanced outputs for each slot. The Mamba adapter is a state-space model with latent dimension \(S\). The recurrence for the hidden state is
+The sequence \(x_{1:T}\) encodes the GSAS-induced order and serves as the input that the Mamba recurrence \cite{gu2023mamba} integrates to produce context-enhanced outputs for each slot. The Mamba adapter is a state-space model with latent dimension \(S\). The recurrence for the hidden state is
 \begin{equation}
 h_t = A\,h_{t-1} + B\,x_t,\qquad h_0=\mathbf{0}\in\mathbb{R}^S,
 \end{equation}
@@ -98,7 +98,7 @@ Given adapted tokens \(Q\in\mathbb{R}^{T\times D}\) produced by the Mamba adapte
 \begin{equation}
 m_t \sim \mathrm{Bernoulli}(p),\qquad m_t\in\{0,1\},
 \end{equation}
-with \(p\in(0,1)\) controlling expected corruption sparsity. The mask \(m_t\) determines which slots receive perturbations; consequently the mask provides binary supervisory labels for corrupted versus clean slots during training and guides the subsequent noise injection. We samples additive isotropic Gaussian noise in the canonical token space:
+with \(p\in(0,1)\) controlling expected corruption sparsity. The mask \(m_t\) determines which slots receive perturbations; consequently the mask provides binary supervisory labels for corrupted versus clean slots during training and guides the subsequent noise injection. We sample additive isotropic Gaussian noise in the canonical token space:
 \begin{equation}
 \varepsilon_t \sim \mathcal{N}\big(0,\sigma^2 I_D\big),
 \end{equation}

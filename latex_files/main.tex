@@ -103,31 +103,32 @@
 \author[3]{Anh-Nhat Nguyen}
 \ead{nhatna3@fe.edu.vn}
 
-\author[1]{Hoang-Nam Duong}
-\ead{Dn6175j@gre.ac.uk}
-\author[1]{Minh-Duc Cao}
-\ead{duccmgch230132@fpt.edu.vn}
 \author[1]{Duc-Huy Ngo}
 \ead{huyndgch230154@fpt.edu.vn}
-\author[1]{Ta Huu Anh Duong}
-\ead{duongthagch220838@fpt.edu.vn}
-\author[1]{Tuan-Minh Huynh}
-\ead{minhhtgch230186@fpt.edu.vn}
-\author[1]{Duc-Manh Nguyen}
-\ead{manhndgch220466@fpt.edu.vn}
+\author[1]{Minh-Duc Cao}
+\ead{duccmgch230132@fpt.edu.vn}
+\author[1]{Minh-Quang Vu}
+\ead{quangvmgch230200@fpt.edu.vn}
+\author[1]{Hoang-Nam Duong}
+\ead{Dn6175j@gre.ac.uk}
+\author[1]{Sy-Huong Nguyen}
+\ead{huongnsgch230101@fpt.edu.vn}
+\author[1]{Thi-Hong Le}
+\ead{hongltgch230156@fpt.edu.vn}
+\author[1]{Van-Viet Dang}
+\ead{vietdvgbh230471@fpt.edu.vn}
 
-\author[3]{Van-Thiep Nguyen}
-\ead{thiepnvhe173027@fpt.edu.vn}
-\author[3]{Thu-Uyen Nguyen}
-\ead{uyennthe176614@fpt.edu.vn}
-\author[3]{Minh-Quang Do}
-\ead{quangdmhe180854@fpt.edu.vn}
 \author[3]{Xuan-Tung Dinh}
 \ead{tungdxhe172611@fpt.edu.vn}
+\author[3]{Minh-Anh Nguyen}
+\ead{anhnmhe182523@fpt.edu.vn}
+\author[3]{Minh-Quang Do}
+\ead{quangdmhe180854@fpt.edu.vn}
+\author[3]{Van-Khanh Giap}
+\ead{khanhgvhe176631@fpt.edu.vn}
 \author[3]{Van-Hiep Duong}
 \ead{hiepdvhe181185@fpt.edu.vn}
-\author[3]{Ngoc-Anh Hoang}
-\ead{anhhnhe186401@fpt.edu.vn}
+
 
 % Address/affiliation
 \affiliation[1]{organization={Greenwich Vietnam, FPT University},
@@ -155,8 +156,9 @@
 
 % Here goes the abstract
 \begin{abstract}
-Automated detection of surface defects on three-dimensional (3D).
+Three-dimensional (3D) industrial defect detection is critical for manufacturing quality assurance, robotic inspection, and safety-sensitive production environments, where reliable geometric anomaly localization directly impacts throughput and system reliability. However, 3D point clouds lack dense texture cues, exhibit unordered and irregular sampling, and offer limited annotated examples; as a result, many existing methods rely on handcrafted geometric descriptors or non-differentiable alignment heuristics that restrict scalability and generalization. We propose a novel 3D anomaly detection framework that integrates three complementary components: a Geometric Semantic-Aware Sorter (GSAS), a Mamba State-Space Adapter (MSSA), and an Attention-Based Discriminator (ABD). GSAS imposes a differentiable, surface-consistent soft-ordering of multi-layer per-patch tokens from a frozen pretrained Transformer; MSSA fuses these ordered tokens to propagate long-range, cross-layer context in linear time; and ABD localizes anomalies by producing slot-level logits that are reprojected to points for dense prediction. Evaluated on the synthetic Anomaly-ShapeNet and real-world Real3D-AD benchmarks using the area under the receiver operating characteristic (AUROC) metric, our method achieves 91.2\% and 76.6\% point-level AUROC respectively, surpassing the best compared baseline by +6.6\% and +2.8\%. The framework runs at approximately 17 frames per second (FPS) with a frozen Transformer backbone, establishing a new benchmark for efficient, interpretable 3D anomaly localization.
 \end{abstract}
+
 
 % Use if graphical abstract is present
 %\begin{graphicalabstract}
@@ -180,7 +182,7 @@ Automated detection of surface defects on three-dimensional (3D).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\input{Introduction} 
+\input{Introduction} 
 %
 \input{RelatedWork}
 %
